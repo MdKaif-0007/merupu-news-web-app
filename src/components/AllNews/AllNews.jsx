@@ -20,9 +20,9 @@ const AllNews = () => {
     // Determine the correct base URL depending on environment
   const baseUrl = process.env.NODE_ENV === 'development'
     ? 'http://localhost:5173'
-    : 'https://merupu-news.vercel.app/'; // <-- Replace with your actual deployed domain
+    : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
 
-  const endpoint = `${baseUrl}/api/news?page=${page}`;
+  const endpoint = `${baseUrl}/api/news?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
 
 
    // const endpoint = `/api/news?page=${page}`;
