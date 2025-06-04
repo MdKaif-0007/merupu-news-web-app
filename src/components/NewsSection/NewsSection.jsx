@@ -16,14 +16,14 @@ const NewsSection = ({ category }) => {
     setLoading(true);
     setError(null);
 
-  //   const baseUrl = process.env.NODE_ENV === 'development'
-  //   ? 'http://localhost:5173'
-  //   : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
+    const baseUrl = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5173'
+    : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
 
-  // const endpoint = `${baseUrl}/api/news/isBreaking?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
+  const endpoint = `${baseUrl}/api/news/isBreaking?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
 
 
-    const endpoint = `/api/news/isBreaking?page=${page}`;
+    //const endpoint = `/api/news/isBreaking?page=${page}`;
 
     try {
       const res = await fetch(endpoint);
