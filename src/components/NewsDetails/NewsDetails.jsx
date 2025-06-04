@@ -17,13 +17,15 @@ const NewsDetail = () => {
       setLoading(true);
       setError("");
 
-      const baseUrl = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:5173'
-  : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app';
+  //     const baseUrl = process.env.NODE_ENV === 'development'
+  // ? 'http://localhost:5173'
+  // : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app';
 
 
+  // ${baseUrl}
+  // .replace(/([^:]\/)\/+/g, "$1")
       try {
-        const res = await fetch(`${baseUrl}/api/news/${id}`).replace(/([^:]\/)\/+/g, "$1");
+        const res = await fetch(`/api/news/${id}`);
         if (!res.ok) throw new Error("Failed to fetch article.");
         const result = await res.json();
         if (!result || Object.keys(result).length === 0) {
