@@ -19,14 +19,14 @@ const NewsDistrict = () => {
     setLoading(true);
     setError(null);
 
-     const baseUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5173'
-    : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
+    //  const baseUrl = process.env.NODE_ENV === 'development'
+    // ? 'http://localhost:5173'
+    // : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
 
-  const endpoint = `${baseUrl}/api/news/district?districts=${category}&page=${page}`.replace(/([^:]\/)\/+/g, "$1");
+ // const endpoint = `${baseUrl}/api/news/district?districts=${category}&page=${page}`.replace(/([^:]\/)\/+/g, "$1");
 
 
-    //const endpoint = `/api/news/district?districts=${category}&page=${page}`;
+    const endpoint = `/api/news/district?districts=${category}&page=${page}`;
 
     try {
       const res = await fetch(endpoint);
@@ -115,7 +115,7 @@ const NewsDistrict = () => {
                     <img
                       src={item.url}
                       alt={item.title}
-                      className="w-full md:w-1/2 h-60 object-cover rounded-md shadow"
+                      className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
                     />
                   )}
                   <div className="flex-1">
@@ -167,51 +167,6 @@ export default NewsDistrict;
 
 
 
-
-
-
-// import React, { useEffect, useRef, useState } from 'react'
-// import { useNavigate, useParams } from "react-router-dom";
-// import { useNewsInfo } from "../ApiHandle/useNewsInfo";
-
-// const NewsDistrict = () => {
-//      const { category } = useParams();
-//      const [articles, setArticles] = useState([]);
-//      const { data, loading, hasMore, loadMore, error } = useNewsInfo(category, "district");
-
-//     const containerRef = useRef(null);
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         if (!loading && data.length === 1 && containerRef.current) {
-//         containerRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-//         } else if (!loading && data.length > 1 && containerRef.current) {
-//         const firstCard = containerRef.current.querySelector("div > div");
-//         if (firstCard) {
-//             firstCard.scrollIntoView({ behavior: "smooth" });
-//         }
-//         }
-//     }, [loading, data]);
-
-//     const handleClick = (article) => {
-//         navigate(`/news/${article._id}`, { state: { article } });
-//     };
-
-//   return (
-//  <div className="text-white">
-//       <h1 className="text-3xl font-bold p-4">{category} News</h1>
-//       {articles.map((article) => (
-//         <div key={article._id} className="p-4 border-b border-gray-700">
-//           <h2 className="text-xl font-semibold">{article.title}</h2>
-//           <p>{article.content.substring(0, 100)}...</p>
-//           <a href={`/article/${article._id}`} className="text-red-500">Read more</a>
-//         </div>
-//       ))}
-//     </div>
-//   )
-// }
-
-// export default NewsDistrict
 
 
 

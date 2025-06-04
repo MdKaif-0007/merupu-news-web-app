@@ -16,14 +16,14 @@ const NewsSection = ({ category }) => {
     setLoading(true);
     setError(null);
 
-    const baseUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5173'
-    : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
+  //   const baseUrl = process.env.NODE_ENV === 'development'
+  //   ? 'http://localhost:5173'
+  //   : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app/'; // <-- Replace with your actual deployed domain
 
-  const endpoint = `${baseUrl}/api/news/isBreaking?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
+  // const endpoint = `${baseUrl}/api/news/isBreaking?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
 
 
-    //const endpoint = `/api/news/isBreaking?page=${page}`;
+    const endpoint = `/api/news/isBreaking?page=${page}`;
 
     try {
       const res = await fetch(endpoint);
@@ -109,7 +109,7 @@ const NewsSection = ({ category }) => {
                   <img
                     src={item.url}
                     alt={item.title}
-                    className="w-full md:w-1/2 h-60 object-cover rounded-md shadow"
+                    className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
                   />
                 )}
                 <div className="flex-1">
@@ -260,214 +260,3 @@ export default NewsSection;
 // export default NewsSection;
 
 
-
-
-
-
-
-
-
-
-
-
-// src/components/NewsSection.jsx
-// import React, { useEffect, useRef } from "react";
-// import { useNewsInfo } from "../ApiHandle/useNewsInfo";
-// import { useNavigate } from "react-router-dom";
-
-// const NewsSection = ({ category }) => {
-//   const { data, loading } = useNewsInfo(category);
-//   const containerRef = useRef(null);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (!loading && data.length === 1 && containerRef.current) {
-//       containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-//     } else if (!loading && data.length > 1 && containerRef.current) {
-//       const firstCard = containerRef.current.querySelector("div > div");
-//       if (firstCard) {
-//         firstCard.scrollIntoView({ behavior: 'smooth' });
-//       }
-//     }
-//   }, [loading, data]);
-
-//   const handleClick = (article) => {
-//     navigate(`/news/${article._id}`, {
-//       state: { article }
-//     });
-//   };
-
-
-   
-//   return (
-//     <div className="p-4" ref={containerRef}>
-//       <h2 className="text-xl font-bold capitalize mb-4">
-//         {category.replace(/-/g, " ")}
-//       </h2>
-
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : data.length === 0 ? (
-//         <p>No news available.</p>
-//       ) : (
-//         <div
-//           className={`grid gap-4 ${
-//             data.length === 1 ? "grid-cols-1" : "md:grid-cols-2 lg:grid-cols-3"
-//           }`}
-//         >
-//           {data.map((item, index) => (
-//             <div
-//               key={index}
-//               className="bg-white shadow rounded p-4 cursor-pointer hover:shadow-lg transition duration-200"
-//               onClick={() => handleClick(item)}
-//             >
-//               {item.url && (
-//                 <img
-//                   src={item.url}
-//                   alt={item.title}
-//                   className="w-full h-48 object-cover rounded mb-2"
-//                 />
-//               )}
-//               <h3 className="font-semibold text-lg text-black">{item.title}</h3>
-//               <p className="text-sm text-gray-600 mt-2">
-//                 {item.description || item.content?.slice(0, 100) + "..."}
-//               </p>
-//               <div className="text-xs text-gray-500 mt-1">
-//                 {item.author} • {new Date(item.publishedAt).toLocaleDateString()}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-
-
-
-
-    
-//   );
-// };
-
-// export default NewsSection;
-
-
-
-
-
-
-
-// import React, { useEffect, useRef, useCallback } from "react";
-// import { useNewsData } from "../ApiHandle/useNewsInfo";
-
-// const NewsSection = ({ category }) => {
-//   const { data, loading, loadMore, hasMore } = useNewsData(category);
-//   const containerRef = useRef(null);
-
-//   const handleScroll = useCallback(() => {
-//     if (!containerRef.current || loading || !hasMore) return;
-
-//     const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
-
-//     if (scrollTop + clientHeight >= scrollHeight - 100) {
-//       loadMore(); // Load next page
-//     }
-//   }, [loading, hasMore, loadMore]);
-
-//   useEffect(() => {
-//     const container = containerRef.current;
-//     if (container) {
-//       container.addEventListener("scroll", handleScroll);
-//       return () => container.removeEventListener("scroll", handleScroll);
-//     }
-//   }, [handleScroll]);
-
-//   return (
-//     <div className="p-4 h-screen overflow-y-auto" ref={containerRef}>
-//       <h2 className="text-xl font-bold capitalize mb-4">
-//         {category.replace(/-/g, " ")} News
-//       </h2>
-
-//       {data.length === 0 && loading ? (
-//         <p>Loading...</p>
-//       ) : data.length === 0 ? (
-//         <p>No news available.</p>
-//       ) : (
-//         <div
-//           className={`grid gap-4 ${
-//             data.length === 1 ? "grid-cols-1" : "md:grid-cols-2 lg:grid-cols-3"
-//           }`}
-//         >
-//           {data.map((item, index) => (
-//             <div key={index} className="bg-white shadow rounded p-4">
-//               <h3 className="font-semibold text-lg">{item.title}</h3>
-//               <p className="text-sm text-gray-600">{item.description}</p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-
-//       {loading && <p className="mt-4 text-center">Loading more news...</p>}
-//     </div>
-//   );
-// };
-
-// export default NewsSection;
-
-
-
-
-
-
-
-
-
-
-
-// src/components/NewsSection.jsx
-// import React, { useEffect, useRef } from "react";
-// import { useNewsData } from "../ApiHandle/useNewsInfo";
-
-// const NewsSection = ({ category }) => {
-//   const { data, loading } = useNewsData(category);
-//   const containerRef = useRef(null);
-
-//   useEffect(() => {
-//     if (!loading && data.length === 1 && containerRef.current) {
-//       containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-//     } else if (!loading && data.length > 1 && containerRef.current) {
-//       const firstCard = containerRef.current.querySelector("div > div");
-//       if (firstCard) {
-//         firstCard.scrollIntoView({ behavior: 'smooth' });
-//       }
-//     }
-//   }, [loading, data]);
-
-//   return (
-//     <div className="p-4" ref={containerRef}>
-//       <h2 className="text-xl font-bold capitalize mb-4">
-//         {category.replace(/-/g, " ")} News
-//       </h2>
-
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : data.length === 0 ? (
-//         <p>No news available.</p>
-//       ) : (
-//         <div
-//           className={`grid gap-4 ${
-//             data.length === 1 ? "grid-cols-1" : "md:grid-cols-2 lg:grid-cols-3"
-//           }`}
-//         >
-//           {data.map((item, index) => (
-//             <div key={index} className="bg-white shadow rounded p-4">
-//               <h3 className="font-semibold text-lg">{item.title}</h3>
-//               <p className="text-sm text-gray-600">{item.description}</p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default NewsSection;
