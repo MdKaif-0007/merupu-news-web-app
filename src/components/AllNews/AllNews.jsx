@@ -25,7 +25,7 @@ const AllNews = () => {
   // const endpoint = `${baseUrl}/api/news?page=${page}`.replace(/([^:]\/)\/+/g, "$1");
 
 
-   const endpoint = `/api/news?page=${page}`;
+   const endpoint = `https://merupu-news.onrender.com/api/news?page=${page}`;
 
     try {
       const res = await fetch(endpoint);

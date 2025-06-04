@@ -25,7 +25,7 @@ const NewsDetail = () => {
   // ${baseUrl}
   // .replace(/([^:]\/)\/+/g, "$1")
       try {
-        const res = await fetch(`/api/news/${id}`);
+        const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
         if (!res.ok) throw new Error("Failed to fetch article.");
         const result = await res.json();
         if (!result || Object.keys(result).length === 0) {
