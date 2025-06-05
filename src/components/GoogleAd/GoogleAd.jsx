@@ -26,11 +26,10 @@ const GoogleAd = () => {
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ display: 'block', width: '100%',  maxWidth: '100%', height: '280px', minHeight: 'auto', }}
+        style={{ display: 'block', width: '100%',  maxWidth: '100%', height: 'auto', minHeight: '280px', }}
         data-ad-client="ca-pub-6358427229469529"
         data-ad-slot="1184119920"
         data-ad-format="fluid"
-        data-ad-layout="in-article"
         data-full-width-responsive="true"
       ></ins>
 

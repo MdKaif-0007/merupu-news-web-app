@@ -55,7 +55,7 @@ const NewsDetail = () => {
     <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
       
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
         <GoogleAd/> 
       </aside>
@@ -64,7 +64,7 @@ const NewsDetail = () => {
       <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
         <button
           onClick={() => navigate(-1)}
-          className="mb-4 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
+          className="mb-4 px-4 py-2 bg-orange-600 text-white rounded hover:bg-[#b6261b]"
         >
           ← Back
         </button>
@@ -86,7 +86,7 @@ const NewsDetail = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
         {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>

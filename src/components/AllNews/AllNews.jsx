@@ -75,7 +75,7 @@ const AllNews = () => {
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Left</span> */}
         <GoogleAd/> 
       </aside>
@@ -111,7 +111,7 @@ const AllNews = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-orange-700 transition">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#b6261b] transition">
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-800 mt-1">
@@ -125,7 +125,7 @@ const AllNews = () => {
                       onClick={(e) => {
                         handleClick(item);
                       }}
-                      className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition cursor-pointer"
+                      className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-[#b6261b] transition cursor-pointer"
                     >
                       Read more
                     </button>
@@ -148,7 +148,7 @@ const AllNews = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>

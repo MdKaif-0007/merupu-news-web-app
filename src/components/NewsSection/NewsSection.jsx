@@ -107,7 +107,7 @@ const NewsSection = ({ category }) => {
                   />
                 )}
                 <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-orange-700 transition">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#b6261b] transition">
                     {item.title}
                   </h3>
                   <p className="text-sm text-gray-800 mt-1">
@@ -121,7 +121,7 @@ const NewsSection = ({ category }) => {
                     onClick={(e) => {
                       handleClick(item);
                     }}
-                    className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition cursor-pointer"
+                    className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-[#b6261b] transition cursor-pointer"
                   >
                     Read more
                   </button>

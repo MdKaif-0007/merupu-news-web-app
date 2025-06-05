@@ -5,6 +5,7 @@ import {
   FaTelegramPlane, FaTwitter, FaYoutube
 } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from "react-icons/md";
+import merupuLogo from '../../assets/merupuLogo.png'
 
 const Header = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const Header = () => {
     <header>
       {/* Top Bar */}
       <div className="bg-white text-black text-sm px-4 py-2 flex justify-between items-center">
-        <div className="flex items-center space-x-3 text-orange-500 text-lg">
+        <div className="flex items-center space-x-3 text-[#b6261b] text-lg">
           <FaFacebookF className='cursor-pointer hover:scale-95' />
           <FaInstagram className='cursor-pointer hover:scale-95' />
           <FaLinkedinIn className='cursor-pointer hover:scale-95' />
@@ -53,8 +54,9 @@ const Header = () => {
       </div>
 
       {/* Logo */}
-      <div className="text-center my-6">
-        <h1 className="text-5xl font-serif text-orange-700 font-bold">Merupu News</h1>
+      <div className="flex justify-center items-center gap-1 my-6">
+        <img src={merupuLogo} alt="" className='h-16'/>
+        <h1 className="text-5xl font-serif text-[#b6261b] font-bold">Merupu News</h1>
       </div>
 
       {/* Navbar */}
@@ -62,21 +64,21 @@ const Header = () => {
         <div className="flex flex-wrap justify-center items-center px-4 py-3 gap-4 text-sm font-semibold relative z-20">
           <Link
             to="/"
-            className={`cursor-pointer ${isExactPath("/") ? "underline underline-offset-8 text-orange-600" : ""}`}
+            className={`cursor-pointer ${isExactPath("/") ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
           >
             BREAKING NEWS
           </Link>
 
           <Link
             to="/news/all-news"
-            className={`cursor-pointer ${isExactPath("/news/all-news") ? "underline underline-offset-8 text-orange-600" : ""}`}
+            className={`cursor-pointer ${isExactPath("/news/all-news") ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
           >
             ALL NEWS
           </Link>
 
           <Link
             to={`/news/${allDistricts[0]}`}
-            className={`cursor-pointer ${isDistrictActive(allDistricts[0]) ? "underline underline-offset-8 text-orange-600" : ""}`}
+            className={`cursor-pointer ${isDistrictActive(allDistricts[0]) ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
           >
             {allDistricts[0].toUpperCase()}
           </Link>
@@ -87,7 +89,7 @@ const Header = () => {
             onClick={() => isMobileView && setIsMobileDropdownOpen(!isMobileDropdownOpen)}
           >
             <div className="flex items-center">
-              <span className="hover:text-orange-700">MORE</span>
+              <span className="hover:text-[#b61b1bf9]">MORE</span>
               <MdKeyboardArrowDown size={20} />
             </div>
 
@@ -101,7 +103,7 @@ const Header = () => {
                   key={index}
                   to={`/news/${dist}`}
                   className={`block px-4 py-2 hover:bg-gray-300 whitespace-nowrap ${
-                    isDistrictActive(dist) ? "text-orange-600 underline" : ""
+                    isDistrictActive(dist) ? "text-[#b6261b] underline" : ""
                   }`}
                 >
                   {dist.toUpperCase()}

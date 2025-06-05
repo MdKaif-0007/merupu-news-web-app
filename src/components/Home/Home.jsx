@@ -23,7 +23,7 @@ const Home = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-fullrounded shadow-md flex items-center justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-fullrounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Right</span> */}
          <GoogleAd/> 
       </aside>
