@@ -16,21 +16,19 @@ const Home = () => {
     <div className="flex flex-col px-4 lg:px-10 py-6 gap-4">
 
       {/* Top Ad Box */}
-      {showTopAd && (
         <div className="w-full bg-gray-100 rounded shadow-md flex justify-center">
-          <GoogleAd onAdStatusChange={setShowTopAd} />
+          <GoogleAd  />
         </div>
-      )}
 
       {/* Middle Content with Left and Right Ads */}
       <div className="flex flex-col lg:flex-row gap-4">
         
         {/* Left Ad */}
-        {showLeftAd && (
+     
           <aside className="w-full lg:w-1/5 bg-gray-100 rounded shadow-md flex justify-center">
-            <GoogleAd onAdStatusChange={setShowLeftAd} />
+            <GoogleAd  />
           </aside>
-        )}
+      
 
         {/* Main News */}
         <main className="w-full lg:flex-1 space-y-8">
@@ -38,19 +36,19 @@ const Home = () => {
         </main>
 
         {/* Right Ad */}
-        {showRightAd && (
+    
           <aside className="w-full lg:w-1/5 bg-gray-100 rounded shadow-md flex justify-center">
-            <GoogleAd onAdStatusChange={setShowRightAd} />
+            <GoogleAd />
           </aside>
-        )}
+   
       </div>
 
       {/* Bottom Ad Box */}
-      {showBottomAd && (
+  
         <div className="w-full bg-gray-100 rounded shadow-md flex justify-center">
-          <GoogleAd onAdStatusChange={setShowBottomAd} />
+          <GoogleAd/>
         </div>
-      )}
+     
     </div>
   );
 };
