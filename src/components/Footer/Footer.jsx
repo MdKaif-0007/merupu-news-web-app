@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {
   FaFacebookF,
   FaInstagram,
@@ -9,9 +9,10 @@ import {
 } from 'react-icons/fa';
 import merupuLogo from '../../assets/merupuLogo.png'
 
-const Footer = () => {
+
+const Footer = forwardRef((props, ref) => {
   return (
-    <footer className="bg-gray-200 text-black">
+    <footer ref={ref} className="bg-gray-200 text-black">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Left Block - Logo + Contact + Social */}
@@ -73,6 +74,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
 
 export default Footer;

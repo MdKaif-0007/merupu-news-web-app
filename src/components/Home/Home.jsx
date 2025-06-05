@@ -1,37 +1,107 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewsSection from '../NewsSection/NewsSection';
-import NewsDetail from '../NewsDetails/NewsDetails';
-import AllNews from '../AllNews/AllNews';
 import GoogleAd from '../GoogleAd/GoogleAd';
 
 const Home = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  // Track each ad's visibility
+  const [showTopAd, setShowTopAd] = useState(false);
+  const [showLeftAd, setShowLeftAd] = useState(false);
+  const [showRightAd, setShowRightAd] = useState(false);
+  const [showBottomAd, setShowBottomAd] = useState(false);
 
   return (
-    <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
-      {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
-        <GoogleAd/> 
-      </aside>
+    <div className="flex flex-col px-4 lg:px-10 py-6 gap-4">
 
-       {/* Main News Content */}
-      <main className="w-full lg:flex-1 space-y-8">
-        <NewsSection category="breaking-news" />
-        {/* Add more NewsSection components if you want to show other categories */}
-      </main>
+      {/* Top Ad Box */}
+      {showTopAd && (
+        <div className="w-full bg-gray-100 rounded shadow-md flex justify-center">
+          <GoogleAd onAdStatusChange={setShowTopAd} />
+        </div>
+      )}
 
-      {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-fullrounded shadow-md flex justify-center">
-        {/* <span className="text-gray-500">AdSense Right</span> */}
-         <GoogleAd/> 
-      </aside>
+      {/* Middle Content with Left and Right Ads */}
+      <div className="flex flex-col lg:flex-row gap-4">
+        
+        {/* Left Ad */}
+        {showLeftAd && (
+          <aside className="w-full lg:w-1/5 bg-gray-100 rounded shadow-md flex justify-center">
+            <GoogleAd onAdStatusChange={setShowLeftAd} />
+          </aside>
+        )}
+
+        {/* Main News */}
+        <main className="w-full lg:flex-1 space-y-8">
+          <NewsSection category="breaking-news" />
+        </main>
+
+        {/* Right Ad */}
+        {showRightAd && (
+          <aside className="w-full lg:w-1/5 bg-gray-100 rounded shadow-md flex justify-center">
+            <GoogleAd onAdStatusChange={setShowRightAd} />
+          </aside>
+        )}
+      </div>
+
+      {/* Bottom Ad Box */}
+      {showBottomAd && (
+        <div className="w-full bg-gray-100 rounded shadow-md flex justify-center">
+          <GoogleAd onAdStatusChange={setShowBottomAd} />
+        </div>
+      )}
     </div>
   );
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import NewsSection from '../NewsSection/NewsSection';
+// import NewsDetail from '../NewsDetails/NewsDetails';
+// import AllNews from '../AllNews/AllNews';
+// import GoogleAd from '../GoogleAd/GoogleAd';
+
+// const Home = () => {
+
+//     const navigate = useNavigate();
+
+//   return (
+//     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
+
+//       {/* Left Ad Box */}
+//       <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
+//         <GoogleAd/> 
+//       </aside>
+
+//        {/* Main News Content */}
+//       <main className="w-full lg:flex-1 space-y-8">
+//         <NewsSection category="breaking-news" />
+//         {/* Add more NewsSection components if you want to show other categories */}
+//       </main>
+
+//       {/* Right Ad Box */}
+//       <aside className="w-full lg:w-1/5 bg-gray-100 min-h-fullrounded shadow-md flex justify-center">
+//         {/* <span className="text-gray-500">AdSense Right</span> */}
+//          <GoogleAd/> 
+//       </aside>
+//     </div>
+//   );
+// };
+
+// export default Home;
 
 
 

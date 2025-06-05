@@ -11,6 +11,7 @@ const NewsSection = ({ category }) => {
   const observer = useRef();
   const lastNewsElementRef = useRef();
   const navigate = useNavigate();
+  const footerRef = useRef();
 
   const fetchNews = async () => {
     setLoading(true);
@@ -53,20 +54,56 @@ const NewsSection = ({ category }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, page]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (loading) return;
+  //   if (observer.current) observer.current.disconnect();
+
+  //   observer.current = new IntersectionObserver(entries => {
+  //     if (entries[0].isIntersecting && hasMore) {
+  //       setPage(prev => prev + 1);
+  //     }
+  //   });
+
+  //   if (lastNewsElementRef.current) {
+  //     observer.current.observe(lastNewsElementRef.current);
+  //   }
+  // }, [loading, hasMore]);
+
+
+
+    useEffect(() => {
     if (loading) return;
+
     if (observer.current) observer.current.disconnect();
 
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prev => prev + 1);
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        const lastEntry = entries[0];
+        const footerEntry = entries[1];
+
+        const isLastVisible = lastEntry?.isIntersecting;
+        const isFooterVisible = footerEntry?.isIntersecting;
+
+        // Only load more if last element is visible AND footer is not visible
+        if (isLastVisible && hasMore && !isFooterVisible) {
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        root: null,
+        threshold: 0.1,
       }
-    });
+    );
 
     if (lastNewsElementRef.current) {
       observer.current.observe(lastNewsElementRef.current);
     }
+    if (footerRef.current) {
+      observer.current.observe(footerRef.current);
+    }
   }, [loading, hasMore]);
+
+
 
   const handleClick = (article) => {
     navigate(`/api/news/${article._id}`, { state: { article } });
@@ -141,6 +178,8 @@ const NewsSection = ({ category }) => {
       {!hasMore && !loading && data.length > 0 && (
         <p className="mt-4 text-gray-500 text-center">No more news to show.</p>
       )}
+
+      <div ref={footerRef}></div>
     </div>
   );
 };

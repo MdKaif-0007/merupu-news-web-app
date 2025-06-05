@@ -64,7 +64,7 @@ const NewsDetail = () => {
       <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
         <button
           onClick={() => navigate(-1)}
-          className="mb-4 px-4 py-2 bg-orange-600 text-white rounded hover:bg-[#b6261b]"
+          className="mb-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-[#b6261b]"
         >
           ← Back
         </button>

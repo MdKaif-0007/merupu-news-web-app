@@ -12,6 +12,7 @@ const AllNews = () => {
   const observer = useRef();
   const lastNewsElementRef = useRef();
   const navigate = useNavigate();
+   const footerRef = useRef();
 
   const fetchNews = async () => {
     setLoading(true);
@@ -53,20 +54,53 @@ const AllNews = () => {
     fetchNews();
   }, [page]);
 
-  useEffect(() => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
+  // useEffect(() => {
+  //   if (loading) return;
+  //   if (observer.current) observer.current.disconnect();
 
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage((prev) => prev + 1);
+  //   observer.current = new IntersectionObserver((entries) => {
+  //     if (entries[0].isIntersecting && hasMore) {
+  //       setPage((prev) => prev + 1);
+  //     }
+  //   });
+
+  //   if (lastNewsElementRef.current) {
+  //     observer.current.observe(lastNewsElementRef.current);
+  //   }
+  // }, [loading, hasMore]);
+
+    useEffect(() => {
+      if (loading) return;
+  
+      if (observer.current) observer.current.disconnect();
+  
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          const lastEntry = entries[0];
+          const footerEntry = entries[1];
+  
+          const isLastVisible = lastEntry?.isIntersecting;
+          const isFooterVisible = footerEntry?.isIntersecting;
+  
+          // Only load more if last element is visible AND footer is not visible
+          if (isLastVisible && hasMore && !isFooterVisible) {
+            setPage((prev) => prev + 1);
+          }
+        },
+        {
+          root: null,
+          threshold: 0.1,
+        }
+      );
+  
+      if (lastNewsElementRef.current) {
+        observer.current.observe(lastNewsElementRef.current);
       }
-    });
-
-    if (lastNewsElementRef.current) {
-      observer.current.observe(lastNewsElementRef.current);
-    }
-  }, [loading, hasMore]);
+      if (footerRef.current) {
+        observer.current.observe(footerRef.current);
+      }
+    }, [loading, hasMore]);
+  
 
   const handleClick = (article) => {
     navigate(`/api/news/${article._id}`, { state: { article } });
@@ -145,6 +179,8 @@ const AllNews = () => {
         {!hasMore && !loading && data.length > 0 && (
           <p className="mt-4 text-gray-500 text-center">No more news to show.</p>
         )}
+
+              <div ref={footerRef}></div>
       </main>
 
       {/* Right Ad Box */}
@@ -152,6 +188,7 @@ const AllNews = () => {
         {/* <span className="text-gray-500">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>
+   
     </div>
   );
 };
