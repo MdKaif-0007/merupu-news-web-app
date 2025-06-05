@@ -76,7 +76,7 @@ const NewsSection = ({ category }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold capitalize mb-4">
+      <h2 className="text-gray-900 text-xl font-bold capitalize mb-4">
         {category.replace(/-/g, " ")}
       </h2>
 
@@ -107,21 +107,21 @@ const NewsSection = ({ category }) => {
                   />
                 )}
                 <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold text-gray-300 group-hover:text-blue-600 transition">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-orange-700 transition">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-gray-800 mt-1">
                     {item.author} &nbsp;–&nbsp;
                     {new Date(item.publishedAt).toLocaleDateString()}
                   </p>
-                  <p className="text-gray-500 mt-2">
+                  <p className="text-gray-700 mt-2">
                     {item.content?.substring(0, 120)}...
                   </p>
                   <button
                     onClick={(e) => {
                       handleClick(item);
                     }}
-                    className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+                    className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition cursor-pointer"
                   >
                     Read more
                   </button>

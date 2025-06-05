@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import GoogleAd from "../GoogleAd/GoogleAd";
 
 const NewsDistrict = () => {
   const [data, setData] = useState([]);
@@ -78,13 +79,14 @@ const NewsDistrict = () => {
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-500">AdSense Left</span>
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+        {/* <span className="text-gray-500">AdSense Left</span> */}
+        <GoogleAd/> 
       </aside>
 
       {/* Main Content */}
       <main className="w-full lg:flex-1 space-y-8">
-        <h2 className="text-xl font-bold capitalize mb-4">{category} News</h2>
+        <h2 className="text-gray-900 text-xl font-bold capitalize mb-4">{category} News</h2>
 
         {error ? (
           <p className="text-red-500">{error}</p>
@@ -93,7 +95,7 @@ const NewsDistrict = () => {
           <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : data.length === 0 ? (
-          <p>No news available.</p>
+          <p className="text-gray-800">No news available.</p>
         ) : (
           <div className="space-y-10">
             {data.map((item, index) => {
@@ -113,21 +115,21 @@ const NewsDistrict = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-300 group-hover:text-blue-600 transition">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-orange-700 transition">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-gray-800 mt-1">
                       {item.author} &nbsp;–&nbsp;
                       {new Date(item.publishedAt).toLocaleDateString()}
                     </p>
-                    <p className="text-gray-500 mt-2">
+                    <p className="text-gray-700 mt-2">
                       {item.content?.substring(0, 120)}...
                     </p>
                     <button
                       onClick={(e) => {
                         handleClick(item);
                       }}
-                      className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+                      className="mt-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition cursor-pointer"
                     >
                       Read more
                     </button>
@@ -143,13 +145,14 @@ const NewsDistrict = () => {
         )}
 
         {!hasMore && !loading && data.length > 0 && (
-          <p className="mt-4 text-gray-500 text-center">No more news to show.</p>
+          <p className="mt-4 text-gray-800 text-center">No more news to show.</p>
         )}
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-500">AdSense Right</span>
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+        {/* <span className="text-gray-500">AdSense Right</span> */}
+        <GoogleAd/> 
       </aside>
     </div>
   );

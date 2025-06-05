@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#3c3c3c] text-white">
+    <footer className="bg-gray-200 text-black">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Left Block - Logo + Contact + Social */}
@@ -42,18 +42,18 @@ const Footer = () => {
       </div>
 
       {/* Black Strip with Sections */}
-      <div className="bg-black py-3 text-center text-sm font-medium space-x-4 overflow-x-auto whitespace-nowrap">
-        <span className="text-white">ThePrint Hindi</span>
+      <div className="bg-white py-3 text-center text-sm font-medium space-x-4 overflow-x-auto whitespace-nowrap">
+        <span className="text-black">Merupu Hindi</span>
         <span className="text-orange-500">|</span>
-        <span className="text-white">ThePrint Tamil</span>
+        <span className="text-black">Merupu Tamil</span>
         <span className="text-orange-500">|</span>
-        <span className="text-white">ThePrint Marathi</span>
+        <span className="text-black">Merupu Marathi</span>
         <span className="text-orange-500">|</span>
-        <span className="text-white">ThePrint Store</span>
+        <span className="text-black">Merupu Store</span>
         <span className="text-orange-500">|</span>
-        <span className="text-white">ThePrint Speakers Bureau</span>
+        <span className="text-black">Merupu Speakers Bureau</span>
         <span className="text-orange-500">|</span>
-        <span className="text-white">ThePrint School Of Journalism</span>
+        <span className="text-black">Merupu School Of Journalism</span>
       </div>
 
       {/* Copyright Strip */}

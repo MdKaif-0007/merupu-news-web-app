@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import GoogleAd from "../GoogleAd/GoogleAd";
 
 const NewsDetail = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const NewsDetail = () => {
 
 
   if (loading) {
-    return <p className="text-center mt-10 text-gray-500">Loading article...</p>;
+    return <p className="text-center mt-10 text-gray-800">Loading article...</p>;
   }
 
   if (error) {
@@ -54,21 +55,22 @@ const NewsDetail = () => {
     <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
       
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-500 text-sm">AdSense Left</span>
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+        {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
+        <GoogleAd/> 
       </aside>
 
       {/* Main Article */}
       <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
         <button
           onClick={() => navigate(-1)}
-          className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="mb-4 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
         >
           ← Back
         </button>
 
-        <h1 className="text-3xl font-bold">{title}</h1>
-        <p className="text-gray-500 text-sm">
+        <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
+        <p className="text-gray-800 text-sm">
           {author} • {new Date(publishedAt).toLocaleString()}
         </p>
 
@@ -80,12 +82,13 @@ const NewsDetail = () => {
           />
         )}
 
-        <p className="text-lg text-gray-500 leading-relaxed">{content}</p>
+        <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-400 text-sm">AdSense Right</span>
+      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex items-center justify-center">
+        {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
+        <GoogleAd/> 
       </aside>
     </div>
   );

@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <header>
       {/* Top Bar */}
-      <div className="bg-black text-white text-sm px-4 py-2 flex justify-between items-center">
+      <div className="bg-white text-black text-sm px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-3 text-orange-500 text-lg">
           <FaFacebookF className='cursor-pointer hover:scale-95' />
           <FaInstagram className='cursor-pointer hover:scale-95' />
@@ -58,7 +58,7 @@ const Header = () => {
       </div>
 
       {/* Navbar */}
-      <nav className="bg-black text-white">
+      <nav className="bg-white text-black">
         <div className="flex flex-wrap justify-center items-center px-4 py-3 gap-4 text-sm font-semibold relative z-20">
           <Link
             to="/"
@@ -93,14 +93,14 @@ const Header = () => {
 
             {/* Dropdown Menu */}
             <div
-              className={`absolute right-0 md:left-0 mt-0 bg-black text-white rounded shadow-lg min-w-max z-30 max-h-72 overflow-y-auto 
+              className={`absolute right-0 md:left-0 mt-0 bg-white text-black rounded shadow-lg min-w-max z-30 max-h-72 overflow-y-auto 
               ${isMobileView ? (isMobileDropdownOpen ? 'block' : 'hidden') : 'hidden group-hover:block'}`}
             >
               {allDistricts.slice(1).map((dist, index) => (
                 <Link
                   key={index}
                   to={`/news/${dist}`}
-                  className={`block px-4 py-2 hover:bg-gray-800 whitespace-nowrap ${
+                  className={`block px-4 py-2 hover:bg-gray-300 whitespace-nowrap ${
                     isDistrictActive(dist) ? "text-orange-600 underline" : ""
                   }`}
                 >
