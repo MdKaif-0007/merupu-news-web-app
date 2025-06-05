@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import NewsSection from '../NewsSection/NewsSection';
 import NewsDetail from '../NewsDetails/NewsDetails';
 import AllNews from '../AllNews/AllNews';
+import GoogleAd from '../GoogleAd/GoogleAd';
 
 const Home = () => {
 
@@ -12,7 +13,8 @@ const Home = () => {
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
       <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-500">AdSense Left</span>
+        {/* <span className="text-gray-500">AdSense Left</span> */}
+        <GoogleAd/> 
       </aside>
 
        {/* Main News Content */}
@@ -23,7 +25,8 @@ const Home = () => {
 
       {/* Right Ad Box */}
       <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex items-center justify-center">
-        <span className="text-gray-500">AdSense Right</span>
+        {/* <span className="text-gray-500">AdSense Right</span> */}
+         <GoogleAd/> 
       </aside>
     </div>
   );

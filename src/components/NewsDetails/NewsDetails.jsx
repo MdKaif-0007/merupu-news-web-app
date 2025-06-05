@@ -17,13 +17,6 @@ const NewsDetail = () => {
       setLoading(true);
       setError("");
 
-  //     const baseUrl = process.env.NODE_ENV === 'development'
-  // ? 'http://localhost:5173'
-  // : 'https://merupu-news-jsa5tch3f-md-kaifs-projects-8d504778.vercel.app';
-
-
-  // ${baseUrl}
-  // .replace(/([^:]\/)\/+/g, "$1")
       try {
         const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
         if (!res.ok) throw new Error("Failed to fetch article.");
