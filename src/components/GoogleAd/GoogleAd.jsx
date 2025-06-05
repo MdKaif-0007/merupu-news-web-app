@@ -28,8 +28,8 @@ const GoogleAd = () => {
       ref={adRef}
       className="adsbygoogle"
       style={{ display: "block", width: "100%" }}
-      data-ad-client="ca-pub-0000000000000000"
-      data-ad-slot="0000000000"                  
+      data-ad-client="ca-pub-6358427229469529"
+      data-ad-slot="1184119920"                  
       data-ad-format="auto"
       data-full-width-responsive="true"
      >
