@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaPlayCircle } from "react-icons/fa";
 
 const NewsSection = ({ category }) => {
   const [data, setData] = useState([]);
@@ -136,13 +137,27 @@ const NewsSection = ({ category }) => {
                 ref={isLast ? lastNewsElementRef : null}
                 className="flex flex-col md:flex-row items-start gap-4 cursor-pointer group"
               >
-                {item.url && (
-                  <img
-                    src={item.url}
-                    alt={item.title}
-                    className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
-                  />
-                )}
+               {item.videoUrl ? (
+                    <div className="relative w-full md:w-1/2 h-60 rounded-md shadow overflow-hidden">
+                      <video
+                        src={item.videoUrl}
+                        className="w-full h-full object-cover rounded-md shadow transform transition duration-300"
+                        playsInline
+                      />
+
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <FaPlayCircle size={60} className="text-white" />
+                      </div>
+                    </div>
+                  ) : (
+                    item.url && (
+                      <img
+                        src={item.url}
+                        alt={item.title}
+                        className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
+                      />
+                    )
+                  )}
                 <div className="flex-1">
                   <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#b6261b] transition">
                     {item.title}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import GoogleAd from "../GoogleAd/GoogleAd";
+import { FaPlayCircle } from "react-icons/fa";
 
 const AllNews = () => {
   const [data, setData] = useState([]);
@@ -12,14 +13,13 @@ const AllNews = () => {
   const observer = useRef();
   const lastNewsElementRef = useRef();
   const navigate = useNavigate();
-   const footerRef = useRef();
+  const footerRef = useRef();
 
   const fetchNews = async () => {
     setLoading(true);
     setError(null);
 
-
-   const endpoint = `https://merupu-news.onrender.com/api/news?page=${page}`;
+    const endpoint = `https://merupu-news.onrender.com/api/news?page=${page}`;
 
     try {
       const res = await fetch(endpoint);
@@ -69,38 +69,37 @@ const AllNews = () => {
   //   }
   // }, [loading, hasMore]);
 
-    useEffect(() => {
-      if (loading) return;
-  
-      if (observer.current) observer.current.disconnect();
-  
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          const lastEntry = entries[0];
-          const footerEntry = entries[1];
-  
-          const isLastVisible = lastEntry?.isIntersecting;
-          const isFooterVisible = footerEntry?.isIntersecting;
-  
-          // Only load more if last element is visible AND footer is not visible
-          if (isLastVisible && hasMore && !isFooterVisible) {
-            setPage((prev) => prev + 1);
-          }
-        },
-        {
-          root: null,
-          threshold: 0.1,
+  useEffect(() => {
+    if (loading) return;
+
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        const lastEntry = entries[0];
+        const footerEntry = entries[1];
+
+        const isLastVisible = lastEntry?.isIntersecting;
+        const isFooterVisible = footerEntry?.isIntersecting;
+
+        // Only load more if last element is visible AND footer is not visible
+        if (isLastVisible && hasMore && !isFooterVisible) {
+          setPage((prev) => prev + 1);
         }
-      );
-  
-      if (lastNewsElementRef.current) {
-        observer.current.observe(lastNewsElementRef.current);
+      },
+      {
+        root: null,
+        threshold: 0.1,
       }
-      if (footerRef.current) {
-        observer.current.observe(footerRef.current);
-      }
-    }, [loading, hasMore]);
-  
+    );
+
+    if (lastNewsElementRef.current) {
+      observer.current.observe(lastNewsElementRef.current);
+    }
+    if (footerRef.current) {
+      observer.current.observe(footerRef.current);
+    }
+  }, [loading, hasMore]);
 
   const handleClick = (article) => {
     navigate(`/api/news/${article._id}`, { state: { article } });
@@ -111,18 +110,20 @@ const AllNews = () => {
       {/* Left Ad Box */}
       <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Left</span> */}
-        <GoogleAd/> 
+        <GoogleAd />
       </aside>
 
       {/* Main Content */}
       <main className="w-full lg:flex-1 space-y-8">
-        <h2 className="text-gray-900 text-xl font-bold capitalize mb-4">All News</h2>
+        <h2 className="text-gray-900 text-xl font-bold capitalize mb-4">
+          All News
+        </h2>
 
         {error ? (
           <p className="text-red-500">{error}</p>
         ) : loading && data.length === 0 ? (
-         <div className="flex justify-center items-center py-10">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex justify-center items-center py-10">
+            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : data.length === 0 ? (
           <p>No news available.</p>
@@ -137,13 +138,28 @@ const AllNews = () => {
                   ref={isLast ? lastNewsElementRef : null}
                   className="flex flex-col md:flex-row items-start gap-4 cursor-pointer group"
                 >
-                  {item.url && (
-                    <img
-                      src={item.url}
-                      alt={item.title}
-                      className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
-                    />
+                  {item.videoUrl ? (
+                    <div className="relative w-full md:w-1/2 h-60 rounded-md shadow overflow-hidden">
+                      <video
+                        src={item.videoUrl}
+                        className="w-full h-full object-cover rounded-md shadow transform transition duration-300"
+                        playsInline
+                      />
+
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <FaPlayCircle size={60} className="text-white" />
+                      </div>
+                    </div>
+                  ) : (
+                    item.url && (
+                      <img
+                        src={item.url}
+                        alt={item.title}
+                        className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
+                      />
+                    )
                   )}
+
                   <div className="flex-1">
                     <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#b6261b] transition">
                       {item.title}
@@ -177,18 +193,19 @@ const AllNews = () => {
         )}
 
         {!hasMore && !loading && data.length > 0 && (
-          <p className="mt-4 text-gray-500 text-center">No more news to show.</p>
+          <p className="mt-4 text-gray-500 text-center">
+            No more news to show.
+          </p>
         )}
 
-              <div ref={footerRef}></div>
+        <div ref={footerRef}></div>
       </main>
 
       {/* Right Ad Box */}
       <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Right</span> */}
-        <GoogleAd/> 
+        <GoogleAd />
       </aside>
-   
     </div>
   );
 };

@@ -6,9 +6,9 @@ import ScrollNewsList from "../ScrollNewsList/ScrollNewsList";
 const NewsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
- const location = useLocation();
+  const location = useLocation();
 
- const [article, setArticle] = useState(location.state?.article || null);
+  const [article, setArticle] = useState(location.state?.article || null);
   const [loading, setLoading] = useState(!article);
   const [error, setError] = useState("");
 
@@ -20,7 +20,9 @@ const NewsDetail = () => {
       setError("");
 
       try {
-        const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
+        const res = await fetch(
+          `https://merupu-news.onrender.com/api/news/${id}`
+        );
         if (!res.ok) throw new Error("Failed to fetch article.");
         const result = await res.json();
         if (!result || Object.keys(result).length === 0) {
@@ -37,9 +39,10 @@ const NewsDetail = () => {
     fetchArticle();
   }, [id, article]);
 
-
   if (loading) {
-    return <p className="text-center mt-10 text-gray-800">Loading article...</p>;
+    return (
+      <p className="text-center mt-10 text-gray-800">Loading article...</p>
+    );
   }
 
   if (error) {
@@ -50,74 +53,65 @@ const NewsDetail = () => {
     return <p className="text-center mt-10 text-red-600">No article found.</p>;
   }
 
-  const { title, author, publishedAt, url, content } = article;
-
+  const { title, author, publishedAt, url, videoUrl, content } = article;
 
   return (
     <div>
-    <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
-      
-      {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
-        {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
-        <GoogleAd/> 
-      </aside>
+      <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
+        {/* Left Ad Box */}
+        <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
+          {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
+          <GoogleAd />
+        </aside>
 
-      {/* Main Article */}
-      <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-[#b6261b]"
-        >
-          ← Back
-        </button>
+        {/* Main Article */}
+        <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="mb-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-[#b6261b]"
+          >
+            ← Back
+          </button>
 
-        <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
-        <p className="text-gray-800 text-sm">
-          {author} • {new Date(publishedAt).toLocaleString()}
-        </p>
+          <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
+          <p className="text-gray-800 text-sm">
+            {author} • {new Date(publishedAt).toLocaleString()}
+          </p>
 
-        {url && (
-          <img
-            src={url}
-            alt="News"
-            className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow"
-          />
-        )}
+          {videoUrl ? (
+            <video
+              src={videoUrl}
+              className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow transform transition duration-300"
+              controls
+            />
+          ) : (
+            url && (
+              <img
+                src={url}
+                alt={title}
+                className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
+              />
+            )
+          )}
 
-        <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
-      </main>
+          <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
+        </main>
 
-      {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
-        {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
-        <GoogleAd/> 
-      </aside>
+        {/* Right Ad Box */}
+        <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
+          {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
+          <GoogleAd />
+        </aside>
+      </div>
 
+      <div>
+        <ScrollNewsList />
+      </div>
     </div>
-
-    <div>
-      <ScrollNewsList/>
-    </div>
-</div>
   );
 };
 
 export default NewsDetail;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
@@ -125,13 +119,11 @@ export default NewsDetail;
 // const NewsDetail = () => {
 //   const { id } = useParams(); // Get article ID from URL
 
-  
 //   const navigate = useNavigate();
 
 //   const [article, setArticle] = useState(null);
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState("");
-
 
 //   useEffect(() => {
 //     const fetchArticle = async () => {
@@ -192,5 +184,3 @@ export default NewsDetail;
 // };
 
 // export default NewsDetail;
-
-
