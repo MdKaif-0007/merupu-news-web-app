@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import GoogleAd from "../GoogleAd/GoogleAd";
+import ScrollNewsList from "../ScrollNewsList/ScrollNewsList";
 
 const NewsDetail = () => {
   const { id } = useParams();
@@ -51,11 +52,13 @@ const NewsDetail = () => {
 
   const { title, author, publishedAt, url, content } = article;
 
+
   return (
+    <div>
     <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
       
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
         <GoogleAd/> 
       </aside>
@@ -86,11 +89,17 @@ const NewsDetail = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>
+
     </div>
+
+    <div>
+      <ScrollNewsList/>
+    </div>
+</div>
   );
 };
 

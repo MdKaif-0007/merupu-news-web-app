@@ -54,31 +54,33 @@ const Header = () => {
       </div>
 
       {/* Logo */}
-      <div className="flex justify-center items-center gap-1 my-6">
+      {/* <div className="flex justify-center items-center gap-1 my-6">
         <img src={merupuLogo} alt="" className='h-16'/>
         <h1 className="text-5xl font-serif text-[#b6261b] font-bold">Merupu News</h1>
-      </div>
+      </div> */}
+
+       <h1 className="text-5xl text-center font-[ 'Poppins','Roboto Slab','Oswald','Lora','Merriweather','serif',] text-[#b6261b] font-bold py-6">Merupu News</h1>
 
       {/* Navbar */}
       <nav className="bg-white text-black">
-        <div className="flex flex-wrap justify-center items-center px-4 py-3 gap-4 text-sm font-semibold relative z-20">
+        <div className="flex flex-wrap justify-center items-center px-4 py-1 gap-4 text-md font-mono font-bold relative z-20">
           <Link
             to="/"
-            className={`cursor-pointer ${isExactPath("/") ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${isExactPath("/") ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
           >
             BREAKING NEWS
           </Link>
 
           <Link
             to="/news/all-news"
-            className={`cursor-pointer ${isExactPath("/news/all-news") ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${isExactPath("/news/all-news") ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
           >
             ALL NEWS
           </Link>
 
           <Link
             to={`/news/${allDistricts[0]}`}
-            className={`cursor-pointer ${isDistrictActive(allDistricts[0]) ? "underline underline-offset-8 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${isDistrictActive(allDistricts[0]) ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
           >
             {allDistricts[0].toUpperCase()}
           </Link>

@@ -10,25 +10,46 @@ const Home = () => {
     const navigate = useNavigate();
 
   return (
+    // <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
+
+    //   {/* Left Ad Box */}
+    //   <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex justify-center">
+    //     <GoogleAd/> 
+    //   </aside>
+
+    //    {/* Main News Content */}
+    //   <main className="w-full lg:flex-1 space-y-8">
+    //     <NewsSection category="breaking-news" />
+    //     {/* Add more NewsSection components if you want to show other categories */}
+    //   </main>
+
+    //   {/* Right Ad Box */}
+    //   <aside className="sticky w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex justify-center">
+    //     {/* <span className="text-gray-500">AdSense Right</span> */}
+    //      <GoogleAd/> 
+    //   </aside>
+    // </div>
+
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
 
-      {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
-        <GoogleAd/> 
-      </aside>
+  {/* Left Ad Box - Sticky on large screens */}
+  <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] rounded shadow-md flex justify-center lg:sticky lg:top-4">
+    <GoogleAd /> 
+  </aside>
 
-       {/* Main News Content */}
-      <main className="w-full lg:flex-1 space-y-8">
-        <NewsSection category="breaking-news" />
-        {/* Add more NewsSection components if you want to show other categories */}
-      </main>
+  {/* Main News Content - Remains scrollable */}
+  <main className="w-full lg:flex-1 space-y-8">
+    <NewsSection category="breaking-news" />
+    {/* Add more NewsSection components if needed */}
+  </main>
 
-      {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
-        {/* <span className="text-gray-500">AdSense Right</span> */}
-         <GoogleAd/> 
-      </aside>
-    </div>
+  {/* Right Ad Box - Sticky on large screens */}
+  <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] rounded shadow-md flex justify-center lg:sticky lg:top-4">
+    <GoogleAd /> 
+  </aside>
+
+</div>
+
   );
 };
 

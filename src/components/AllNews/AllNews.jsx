@@ -109,7 +109,7 @@ const AllNews = () => {
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Left</span> */}
         <GoogleAd/> 
       </aside>
@@ -184,7 +184,7 @@ const AllNews = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 min-h-full rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
         {/* <span className="text-gray-500">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>
