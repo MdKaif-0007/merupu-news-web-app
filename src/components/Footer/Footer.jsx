@@ -7,10 +7,18 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import merupuLogo from "../../assets/merupuLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = forwardRef((props, ref) => {
+
+   const location = useLocation();
+   const isAboutPage = location.pathname === '/about';
+   const isContactPage = location.pathname ==='/contact';
+   const isprivacyPage = location.pathname === '/privacy';
+
+
   return (
     <footer ref={ref} className="bg-gray-200 text-black ">
       {/* Top Section */}
@@ -25,16 +33,12 @@ const Footer = forwardRef((props, ref) => {
             <p className="text-sm">Subsidary of merupulu media services</p>
             <p className="text-sm">
               Contact us:{" "}
-              <span className="text-[#b6261b]">bolgam2@gmail.com</span>
+              <span className="text-[#b6261b]">contact@merupulu.com</span>
             </p>
             <p className="mt-4 font-semibold">FOLLOW US</p>
             <div className="flex justify-center space-x-3 mt-2">
-              <FaFacebookF className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-              <FaInstagram className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-              <FaLinkedinIn className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-              <FaTelegramPlane className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
               <Link to="https://x.com/merupulu?lang=en">
-                <FaTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+                <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
               </Link>
               <Link to="https://www.youtube.com/@merupulu">
                 <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
@@ -64,15 +68,27 @@ const Footer = forwardRef((props, ref) => {
         <span>
           Copyright © 2025 merupulu media services : All rights reserved.
         </span>
-        <Link to='/about'>
+        <a href="/about" target="_blank" rel="noopener noreferrer"
+         onClick={(e) => {
+          if (isAboutPage) e.preventDefault(); // prevent navigating again
+         }}
+        >
           <span>About</span>
-        </Link>
-        <Link to='/contact'>
-          <span>Contact</span>
-        </Link>
-        <Link to='/privacy'>
+        </a>
+        <a href="/contact" target="_blank" rel="noopener noreferrer"
+           onClick={(e) => {
+          if (isContactPage) e.preventDefault(); // prevent navigating again
+         }}
+         >
+        <span>Contact</span>
+       </a>
+        <a href="/privacy" target="_blank" rel="noopener noreferrer"
+           onClick={(e) => {
+          if (isprivacyPage) e.preventDefault(); // prevent navigating again
+         }}
+        >
           <span>Privacy Policy</span>
-        </Link>
+          </a>
       </div>
     </footer>
   );

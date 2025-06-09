@@ -107,14 +107,19 @@ const NewsDistrict = () => {
     }, [loading, hasMore]);
   
 
-  const handleClick = (article) => {
-    navigate(`/api/news/${article._id}`, { state: { article } });
-  };
+  // const handleClick = (article) => {
+  //   navigate(`/api/news/${article._id}`, { state: { article } });
+  // };
+
+    const handleClick = (article) => {
+  const url = `/api/news/${article._id}`;
+  window.open(url, '_blank');
+};
 
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
         {/* <span className="text-gray-500">AdSense Left</span> */}
         <GoogleAd/> 
       </aside>
@@ -168,8 +173,7 @@ const NewsDistrict = () => {
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-800 mt-1">
-                      {item.author} &nbsp;–&nbsp;
-                      {new Date(item.publishedAt).toLocaleDateString()}
+                     {item.author} • {new Date(item.publishedAt).toLocaleString()}
                     </p>
                     <p className="text-gray-700 mt-2">
                       {item.content?.substring(0, 120)}...
@@ -201,7 +205,7 @@ const NewsDistrict = () => {
       </main>
 
       {/* Right Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
+      <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
         {/* <span className="text-gray-500">AdSense Right</span> */}
         <GoogleAd/> 
       </aside>

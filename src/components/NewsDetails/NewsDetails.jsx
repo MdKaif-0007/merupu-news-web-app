@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import GoogleAd from "../GoogleAd/GoogleAd";
 import ScrollNewsList from "../ScrollNewsList/ScrollNewsList";
 
-const NewsDetail = () => {
+const NewsDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,6 +11,11 @@ const NewsDetail = () => {
   const [article, setArticle] = useState(location.state?.article || null);
   const [loading, setLoading] = useState(!article);
   const [error, setError] = useState("");
+
+  // ✅ Safe to call useEffect early
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     if (article) return;
@@ -20,9 +25,7 @@ const NewsDetail = () => {
       setError("");
 
       try {
-        const res = await fetch(
-          `https://merupu-news.onrender.com/api/news/${id}`
-        );
+        const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
         if (!res.ok) throw new Error("Failed to fetch article.");
         const result = await res.json();
         if (!result || Object.keys(result).length === 0) {
@@ -37,12 +40,11 @@ const NewsDetail = () => {
     };
 
     fetchArticle();
-  }, [id, article]);
+  }, [article, id]);
 
+  // ✅ These are now safe to keep AFTER hooks
   if (loading) {
-    return (
-      <p className="text-center mt-10 text-gray-800">Loading article...</p>
-    );
+    return <p className="text-center mt-10 text-gray-800">Loading article...</p>;
   }
 
   if (error) {
@@ -58,20 +60,17 @@ const NewsDetail = () => {
   return (
     <div>
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
-        {/* Left Ad Box */}
-        <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
-          {/* <span className="text-gray-500 text-sm">AdSense Left</span> */}
+        <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
           <GoogleAd />
         </aside>
 
-        {/* Main Article */}
         <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
-          <button
+          {/* <button
             onClick={() => navigate(-1)}
             className="mb-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-[#b6261b]"
           >
             ← Back
-          </button>
+          </button> */}
 
           <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
           <p className="text-gray-800 text-sm">
@@ -89,7 +88,7 @@ const NewsDetail = () => {
               <img
                 src={url}
                 alt={title}
-                className="w-full md:w-1/2 h-60 object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
+                className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
               />
             )
           )}
@@ -97,9 +96,7 @@ const NewsDetail = () => {
           <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
         </main>
 
-        {/* Right Ad Box */}
-        <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] lg:sticky lg:top-4 rounded shadow-md flex justify-center">
-          {/* <span className="text-gray-400 text-sm">AdSense Right</span> */}
+        <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
           <GoogleAd />
         </aside>
       </div>
@@ -111,7 +108,8 @@ const NewsDetail = () => {
   );
 };
 
-export default NewsDetail;
+export default NewsDetails;
+
 
 // import React, { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";

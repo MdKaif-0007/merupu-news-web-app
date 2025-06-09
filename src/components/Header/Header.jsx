@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
-  FaFacebookF, FaInstagram, FaLinkedinIn,
-  FaTelegramPlane, FaTwitter, FaYoutube
-} from 'react-icons/fa';
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTelegramPlane,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import merupuLogo from '../../assets/merupuLogo.png'
+import { FaXTwitter } from "react-icons/fa6";
 
 const Header = () => {
   const location = useLocation();
@@ -21,74 +25,119 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const today = new Date().toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 
   const allDistricts = [
-    "hyderabad", "rangareddy", "vikarabad", "medchal", "adilabad", "asifabad", "nirmal",
-    "mancherial", "nizamabad", "kamareddy", "karimnagar", "peddapally", "sircilla", "jagityal", "warangal", "hanmakonda",
-    "janagama", "mahabubabad", "bhupalapalli", "mulugu", "khammam", "kothagudem", "mahbubnagar", "gadwala", "vanaparthi",
-    "nagarkurnool", "narayanapet", "medak", "sangareddy", "siddipet", "nalgonda", "suryapet", "bhuvanagiri",
+    "hyderabad",
+    "rangareddy",
+    "vikarabad",
+    "medchal",
+    "adilabad",
+    "asifabad",
+    "nirmal",
+    "mancherial",
+    "nizamabad",
+    "kamareddy",
+    "karimnagar",
+    "peddapally",
+    "sircilla",
+    "jagityal",
+    "warangal",
+    "hanmakonda",
+    "janagama",
+    "mahabubabad",
+    "bhupalapalli",
+    "mulugu",
+    "khammam",
+    "kothagudem",
+    "mahbubnagar",
+    "gadwala",
+    "vanaparthi",
+    "nagarkurnool",
+    "narayanapet",
+    "medak",
+    "sangareddy",
+    "siddipet",
+    "nalgonda",
+    "suryapet",
+    "bhuvanagiri",
   ];
 
   const isExactPath = (path) => location.pathname === path;
-  const isDistrictActive = (name) => location.pathname.toLowerCase().includes(`/news/${name}`);
+  const isDistrictActive = (name) =>
+    location.pathname.toLowerCase().includes(`/news/${name}`);
 
   return (
     <header>
       {/* Top Bar */}
       <div className="bg-white text-black text-sm px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-3 text-[#b6261b] text-lg">
-          <FaFacebookF className='cursor-pointer hover:scale-95' />
-          <FaInstagram className='cursor-pointer hover:scale-95' />
-          <FaLinkedinIn className='cursor-pointer hover:scale-95' />
-          <FaTelegramPlane className='cursor-pointer hover:scale-95' />
-          <FaTwitter className='cursor-pointer hover:scale-95' />
-          <FaYoutube className='cursor-pointer hover:scale-95' />
+          <Link to="https://x.com/merupulu?lang=en">
+            <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+          </Link>
+          <Link to="https://www.youtube.com/@merupulu">
+            <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+          </Link>
         </div>
         <div>{today}</div>
         <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-3 py-1 rounded-full text-xs">
-          Support our Journalism!
+          Merupulu Media Services
         </button>
       </div>
 
-      {/* Logo */}
-      {/* <div className="flex justify-center items-center gap-1 my-6">
-        <img src={merupuLogo} alt="" className='h-16'/>
-        <h1 className="text-5xl font-serif text-[#b6261b] font-bold">Merupu News</h1>
-      </div> */}
-
-       <h1 className="text-5xl text-center font-[ 'Poppins','Roboto Slab','Oswald','Lora','Merriweather','serif',] text-[#b6261b] font-bold py-6">Merupu News</h1>
+      <h1 className="text-5xl text-center font-[ 'Poppins','Roboto Slab','Oswald','Lora','Merriweather','serif',] text-[#b6261b] font-bold py-6">
+        Merupu News
+      </h1>
 
       {/* Navbar */}
       <nav className="bg-white text-black">
         <div className="flex flex-wrap justify-center items-center px-4 py-1 gap-4 text-md font-mono font-bold relative z-20">
           <Link
             to="/"
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${isExactPath("/") ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+              isExactPath("/")
+                ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
+                : ""
+            }`}
           >
             BREAKING NEWS
           </Link>
 
           <Link
             to="/news/all-news"
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${isExactPath("/news/all-news") ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+              isExactPath("/news/all-news")
+                ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
+                : ""
+            }`}
           >
             ALL NEWS
           </Link>
 
           <Link
             to={`/news/${allDistricts[0]}`}
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${isDistrictActive(allDistricts[0]) ? "underline underline-offset-8 decoration-2 text-[#b6261b]" : ""}`}
+            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+              isDistrictActive(allDistricts[0])
+                ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
+                : ""
+            }`}
           >
             {allDistricts[0].toUpperCase()}
           </Link>
 
           {/* Responsive Dropdown for MORE */}
           <div
-            className={`relative group cursor-pointer ${isMobileView ? '' : 'hover-trigger'}`}
-            onClick={() => isMobileView && setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+            className={`relative group cursor-pointer ${
+              isMobileView ? "" : "hover-trigger"
+            }`}
+            onClick={() =>
+              isMobileView && setIsMobileDropdownOpen(!isMobileDropdownOpen)
+            }
           >
             <div className="flex items-center">
               <span className="hover:text-[#b61b1bf9]">MORE</span>
@@ -98,7 +147,13 @@ const Header = () => {
             {/* Dropdown Menu */}
             <div
               className={`absolute right-0 md:left-0 mt-0 bg-white text-black rounded shadow-lg min-w-max z-30 max-h-72 overflow-y-auto 
-              ${isMobileView ? (isMobileDropdownOpen ? 'block' : 'hidden') : 'hidden group-hover:block'}`}
+              ${
+                isMobileView
+                  ? isMobileDropdownOpen
+                    ? "block"
+                    : "hidden"
+                  : "hidden group-hover:block"
+              }`}
             >
               {allDistricts.slice(1).map((dist, index) => (
                 <Link
@@ -120,12 +175,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
-
 
 // import React from 'react';
 // import { Link, useLocation } from 'react-router-dom';
@@ -229,8 +278,3 @@ export default Header;
 // };
 
 // export default Header;
-
-
-
-
-

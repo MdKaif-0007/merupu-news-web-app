@@ -8,12 +8,14 @@ import {
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Layout from "../Layout";
-import NewsDetail from "./components/NewsDetails/NewsDetails";
+import NewsDetails from "./components/NewsDetails/NewsDetails";
 import AllNews from "./components/AllNews/AllNews";
 import NewsDistrict from "./components/NewsDistrict/NewsDistrict";
 import ContactUs from "./components/Links/ContactUs";
 import About from "./components/Links/About";
 import PrivacyPolicy from "./components/Links/PrivacyPolicy";
+// import ScrollNewsDetails from "./components/ScrollNewsDetails/ScrollNewsDetails";
+
 
 
 function App() {
@@ -23,7 +25,8 @@ function App() {
         <Route path="" element={<Home />} />
 
         <Route path="/news/:category" element={<NewsDistrict />} />
-        <Route path="/api/news/:id" element={<NewsDetail />} />
+        <Route path="/api/news/:id" element={<NewsDetails />} />
+        {/* <Route path="/api/news/:id" element={<ScrollNewsDetails />} /> */}
 
         <Route path="/news/all-news" element={<AllNews/>} />
 

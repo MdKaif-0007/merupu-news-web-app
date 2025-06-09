@@ -6,19 +6,19 @@ const PrivacyPolicy = () => {
       }, []);
 
   return (
-    <div className="min-h-screen px-4 py-10 bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className="min-h-screen px-4 py-10 bg-[#DBDBDB] text-gray-800">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Title */}
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold underline underline-offset-8 decoration-blue-600 mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold underline underline-offset-8 decoration-gray-800 mb-2">
             Privacy Policy – Merupu Telugu News Website
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Effective Date: [Insert Date]</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Effective Date: [09/06/2025]</p>
         </div>
 
         {/* Introduction */}
         <p className="text-lg leading-relaxed">
-          At <strong>Merupu</strong> (<a href="https://merupu.merupulu.com/" className="text-blue-600 dark:text-blue-400" target="_blank" rel="noopener noreferrer">https://merupu.merupulu.com/</a>), we value your privacy and are committed to protecting your personal information. This policy outlines how we collect, use, and safeguard the data you provide while browsing our website.
+          At <strong>Merupu</strong> (<a href="https://merupu.merupulu.com/" className="text-blue-600 " target="_blank" rel="noopener noreferrer">https://news.merupulu.com/</a>), we value your privacy and are committed to protecting your personal information. This policy outlines how we collect, use, and safeguard the data you provide while browsing our website.
         </p>
 
         {/* Sections */}
@@ -59,7 +59,7 @@ const PrivacyPolicy = () => {
           <div>
             <p>
               By using this website, you agree to this Privacy Policy. <br />
-              For questions, contact: <a href="mailto:contact@merupulu.com" className="text-blue-600 dark:text-blue-400">contact@merupulu.com</a>
+              For questions, contact: <a href="mailto:contact@merupulu.com" className="text-blue-600">contact@merupulu.com</a>
             </p>
           </div>
         </div>

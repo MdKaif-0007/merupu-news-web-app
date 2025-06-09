@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 
 const ScrollNewsList = () => {
@@ -36,6 +37,18 @@ const ScrollNewsList = () => {
     fetchNews();
   }, []);
 
+  const navigate = useNavigate();
+
+  //  const handleClick = (article) => {
+  //   navigate(`/api/news/${article._id}`, { state: { article } });
+  // };
+
+    const handleClick = (article) => {
+  const url = `/api/news/${article._id}`;
+ window.open(url, '_blank');
+   //navigate(url);
+};
+
   return (
  <div className="relative w-full px-16 pt-6 pb-4">
       {/* Scrollable Container */}
@@ -48,6 +61,7 @@ const ScrollNewsList = () => {
         ) : data.length > 0 ? (
           data.map((item) => (
             <div
+              onClick={() => handleClick(item)}
               key={item._id}
               className="flex-shrink-0 w-72 bg-white rounded-lg shadow-md overflow-hidden"
             >

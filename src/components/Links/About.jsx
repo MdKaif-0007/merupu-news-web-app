@@ -6,11 +6,11 @@ const About = () => {
       }, []);
 
   return (
-    <div className="min-h-screen px-4 py-10 bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className="min-h-screen px-4 py-10 bg-[#DBDBDB] text-gray-800">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Page Title */}
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold underline underline-offset-8 decoration-blue-600">
+          <h1 className="text-3xl md:text-4xl font-bold underline underline-offset-8 decoration-gray-800">
             About Us – Merupu Telugu News Portal
           </h1>
         </div>
@@ -30,8 +30,8 @@ const About = () => {
         </div>
 
         {/* Why Choose Us */}
-        <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-4">
-          <h2 className="text-2xl font-semibold text-blue-600">Why Choose Merupu?</h2>
+        <div className=" bg-gray-200 p-6 rounded-lg shadow-md space-y-4">
+          <h2 className="text-2xl font-semibold text-gray-800">Why Choose Merupu?</h2>
           <ul className="list-disc list-inside space-y-2 text-base">
             <li>✅ Telugu-first approach with easy-to-read content</li>
             <li>✅ 24/7 news updates from verified sources</li>

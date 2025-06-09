@@ -107,8 +107,9 @@ const NewsSection = ({ category }) => {
 
 
   const handleClick = (article) => {
-    navigate(`/api/news/${article._id}`, { state: { article } });
-  };
+  const url = `/api/news/${article._id}`;
+  window.open(url, '_blank');
+};
 
     
 
@@ -163,8 +164,7 @@ const NewsSection = ({ category }) => {
                     {item.title}
                   </h3>
                   <p className="text-sm text-gray-800 mt-1">
-                    {item.author} &nbsp;–&nbsp;
-                    {new Date(item.publishedAt).toLocaleDateString()}
+                    {item.author} • {new Date(item.publishedAt).toLocaleString()}
                   </p>
                   <p className="text-gray-700 mt-2">
                     {item.content?.substring(0, 120)}...

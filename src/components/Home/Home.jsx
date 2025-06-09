@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewsSection from '../NewsSection/NewsSection';
 import NewsDetail from '../NewsDetails/NewsDetails';
@@ -7,33 +7,57 @@ import GoogleAd from '../GoogleAd/GoogleAd';
 
 const Home = () => {
 
-    const navigate = useNavigate();
+     const footerRef = useRef();
+  const leftAdRef = useRef();
+
+  useEffect(() => {
+    const adBox = leftAdRef.current;
+    if (!adBox) return;
+
+    // Prevent main page scroll when scrolling inside ad box
+    const onWheel = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = adBox;
+      const delta = e.deltaY;
+
+      // Scrolling up at the top or down at the bottom should allow main page scroll,
+      // else prevent it.
+      const isAtTop = scrollTop === 0;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+
+      if (
+        (delta < 0 && !isAtTop) || // scrolling up and NOT at top
+        (delta > 0 && !isAtBottom) // scrolling down and NOT at bottom
+      ) {
+        e.stopPropagation();
+        // Prevent main page scroll by preventing default only if you want
+        // e.preventDefault();
+      }
+      // Else allow scroll to propagate (to scroll main page)
+    };
+
+    adBox.addEventListener('wheel', onWheel, { passive: false });
+
+    return () => {
+      adBox.removeEventListener('wheel', onWheel);
+    };
+  }, []);
+
+  const handleAdScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    if (scrollTop + clientHeight >= scrollHeight - 1) {
+      footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
 
   return (
-    // <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
-
-    //   {/* Left Ad Box */}
-    //   <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex justify-center">
-    //     <GoogleAd/> 
-    //   </aside>
-
-    //    {/* Main News Content */}
-    //   <main className="w-full lg:flex-1 space-y-8">
-    //     <NewsSection category="breaking-news" />
-    //     {/* Add more NewsSection components if you want to show other categories */}
-    //   </main>
-
-    //   {/* Right Ad Box */}
-    //   <aside className="sticky w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[600px] rounded shadow-md flex justify-center">
-    //     {/* <span className="text-gray-500">AdSense Right</span> */}
-    //      <GoogleAd/> 
-    //   </aside>
-    // </div>
-
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
 
   {/* Left Ad Box - Sticky on large screens */}
-  <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] rounded shadow-md flex justify-center lg:sticky lg:top-4">
+  <aside
+  ref={leftAdRef}
+ onScroll={handleAdScroll}
+  className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] rounded  flex justify-center lg:sticky lg:top-4">
     <GoogleAd /> 
   </aside>
 
@@ -41,10 +65,11 @@ const Home = () => {
   <main className="w-full lg:flex-1 space-y-8">
     <NewsSection category="breaking-news" />
     {/* Add more NewsSection components if needed */}
+     <div ref={footerRef}></div>
   </main>
 
   {/* Right Ad Box - Sticky on large screens */}
-  <aside className="w-full lg:w-1/5 bg-gray-100 h-40 lg:h-[800px] rounded shadow-md flex justify-center lg:sticky lg:top-4">
+  <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] rounded  flex justify-center lg:sticky lg:top-4">
     <GoogleAd /> 
   </aside>
 
