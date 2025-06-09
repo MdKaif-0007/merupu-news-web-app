@@ -77,12 +77,21 @@ const Header = () => {
       {/* Top Bar */}
       <div className="bg-white text-black text-sm px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-3 text-[#b6261b] text-lg">
-          <Link to="https://x.com/merupulu?lang=en">
-            <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-          </Link>
-          <Link to="https://www.youtube.com/@merupulu">
-            <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-          </Link>
+                       <a
+                href="https://x.com/merupulu?lang=en"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+              </a>
+
+              <a
+                href="https://www.youtube.com/@merupulu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+              </a>
         </div>
         <div>{today}</div>
         <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-3 py-1 rounded-full text-xs">

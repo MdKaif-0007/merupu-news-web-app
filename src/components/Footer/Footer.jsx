@@ -12,12 +12,10 @@ import merupuLogo from "../../assets/merupuLogo.png";
 import { Link, useLocation } from "react-router-dom";
 
 const Footer = forwardRef((props, ref) => {
-
-   const location = useLocation();
-   const isAboutPage = location.pathname === '/about';
-   const isContactPage = location.pathname ==='/contact';
-   const isprivacyPage = location.pathname === '/privacy';
-
+  const location = useLocation();
+  const isAboutPage = location.pathname === "/about";
+  const isContactPage = location.pathname === "/contact";
+  const isprivacyPage = location.pathname === "/privacy";
 
   return (
     <footer ref={ref} className="bg-gray-200 text-black ">
@@ -37,12 +35,21 @@ const Footer = forwardRef((props, ref) => {
             </p>
             <p className="mt-4 font-semibold">FOLLOW US</p>
             <div className="flex justify-center space-x-3 mt-2">
-              <Link to="https://x.com/merupulu?lang=en">
+              <a
+                href="https://x.com/merupulu?lang=en"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-              </Link>
-              <Link to="https://www.youtube.com/@merupulu">
+              </a>
+
+              <a
+                href="https://www.youtube.com/@merupulu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -68,27 +75,36 @@ const Footer = forwardRef((props, ref) => {
         <span>
           Copyright © 2025 merupulu media services : All rights reserved.
         </span>
-        <a href="/about" target="_blank" rel="noopener noreferrer"
-         onClick={(e) => {
-          if (isAboutPage) e.preventDefault(); // prevent navigating again
-         }}
+        <a
+          href="/about"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            if (isAboutPage) e.preventDefault(); // prevent navigating again
+          }}
         >
           <span>About</span>
         </a>
-        <a href="/contact" target="_blank" rel="noopener noreferrer"
-           onClick={(e) => {
-          if (isContactPage) e.preventDefault(); // prevent navigating again
-         }}
-         >
-        <span>Contact</span>
-       </a>
-        <a href="/privacy" target="_blank" rel="noopener noreferrer"
-           onClick={(e) => {
-          if (isprivacyPage) e.preventDefault(); // prevent navigating again
-         }}
+        <a
+          href="/contact"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            if (isContactPage) e.preventDefault(); // prevent navigating again
+          }}
+        >
+          <span>Contact</span>
+        </a>
+        <a
+          href="/privacy"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            if (isprivacyPage) e.preventDefault(); // prevent navigating again
+          }}
         >
           <span>Privacy Policy</span>
-          </a>
+        </a>
       </div>
     </footer>
   );

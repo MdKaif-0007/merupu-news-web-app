@@ -13,34 +13,74 @@ const NewsDetails = () => {
   const [error, setError] = useState("");
 
   // ✅ Safe to call useEffect early
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // }, []);
+
+  // useEffect(() => {
+  //   if (article) return;
+
+  //   const fetchArticle = async () => {
+  //     setLoading(true);
+  //     setError("");
+
+  //     try {
+  //       const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
+  //       if (!res.ok) throw new Error("Failed to fetch article.");
+  //       const result = await res.json();
+  //       if (!result || Object.keys(result).length === 0) {
+  //         throw new Error("Article not found.");
+  //       }
+  //       setArticle(result);
+  //     } catch (err) {
+  //       setError(err.message || "Error loading article.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchArticle();
+  // }, [article, id]);
+
 
   useEffect(() => {
-    if (article) return;
+  const fetchArticle = async () => {
+    setLoading(true);
+    setError("");
+    setArticle(null); // Clear previous article before loading new one
 
-    const fetchArticle = async () => {
-      setLoading(true);
-      setError("");
-
-      try {
-        const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch article.");
-        const result = await res.json();
-        if (!result || Object.keys(result).length === 0) {
-          throw new Error("Article not found.");
-        }
-        setArticle(result);
-      } catch (err) {
-        setError(err.message || "Error loading article.");
-      } finally {
-        setLoading(false);
+    try {
+      // If article was passed through state, use it directly
+      if (location.state?.article && location.state.article._id === id) {
+        setArticle(location.state.article);
+        return;
       }
-    };
 
-    fetchArticle();
-  }, [article, id]);
+      // Otherwise fetch by ID
+      const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch article.");
+      const result = await res.json();
+      if (!result || Object.keys(result).length === 0) {
+        throw new Error("Article not found.");
+      }
+      setArticle(result);
+    } catch (err) {
+      setError(err.message || "Error loading article.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchArticle();
+}, [id, location.state]);
+
+
+useEffect(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}, [id]);
+
+
+
 
   // ✅ These are now safe to keep AFTER hooks
   if (loading) {
