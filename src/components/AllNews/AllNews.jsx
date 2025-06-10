@@ -103,7 +103,14 @@ const AllNews = () => {
         </button>
       </div>
     );
+    
   };
+
+useEffect(() => {
+   window.scrollTo({ top: 0, behavior: "smooth" });
+}, [page]);
+
+
 
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">

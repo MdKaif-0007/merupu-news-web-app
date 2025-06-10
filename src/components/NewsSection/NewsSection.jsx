@@ -105,6 +105,11 @@ const NewsSection = ({ category }) => {
     );
   };
 
+  useEffect(() => {
+   window.scrollTo({ top: 0, behavior: "smooth" });
+}, [page]);
+
+
   return (
     <div className="p-4">
       <h2 className="text-gray-900 text-xl font-bold capitalize mb-4">

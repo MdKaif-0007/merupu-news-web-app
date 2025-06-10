@@ -40,7 +40,7 @@ const ScrollNewsList = () => {
             <div
               key={item._id}
               onClick={() => handleClick(item)}
-              className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition duration-300"
+              className="overflow-hidden cursor-pointer border-b-[1px] border-gray-100 "
             >
               <div className="p-4">
                 <h3 className="text-lg text-gray-700 font-semibold mb-2">{item.title}</h3>
