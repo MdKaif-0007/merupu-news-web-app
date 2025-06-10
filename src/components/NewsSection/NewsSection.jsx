@@ -154,10 +154,10 @@ const NewsSection = ({ category }) => {
                 <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#b6261b] transition">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-800 mt-1">
-                  {item.author} • {new Date(item.publishedAt).toLocaleString()}
+                <p className="text-sm text-gray-700 font-semibold mt-1">
+                  <span className='text-gray-800'>{item.author}</span> • {new Date(item.publishedAt).toLocaleString()}
                 </p>
-                <p className="text-gray-700 mt-2">
+                <p className="text-gray-600 mt-2">
                   {item.content?.substring(0, 120)}...
                 </p>
                 {/* <button

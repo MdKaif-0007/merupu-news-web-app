@@ -29,7 +29,7 @@ const ScrollNewsList = () => {
   };
 
   return (
-    <div className="w-full px-6 pt-6 pb-4">
+    <div className="w-full px-6 pt-6 pb-4 rounded-xl">
       <h2 className="text-xl font-bold text-gray-800 mb-4">Suggestions</h2>
 
       {loading ? (
@@ -40,12 +40,12 @@ const ScrollNewsList = () => {
             <div
               key={item._id}
               onClick={() => handleClick(item)}
-              className="overflow-hidden cursor-pointer border-b-[1px] border-gray-100 "
+              className="overflow-hidden cursor-pointer border-b-[1px] border-gray-300 "
             >
-              <div className="p-4">
-                <h3 className="text-lg text-gray-700 font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-500">
-                 {item.author} • {new Date(item.publishedAt).toLocaleString()}
+              <div className="p-4 hover:scale-102 transition-transform duration-200">
+                <h3 className="text-lg text-gray-900 hover:text-[#b61b1bf9] font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-700 font-semibold">
+                 <span className='text-gray-800'>{item.author}</span> • {new Date(item.publishedAt).toLocaleString()}
                 </p>
               </div>
             </div>

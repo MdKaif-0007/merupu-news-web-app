@@ -113,8 +113,8 @@ useEffect(() => {
           </button> */}
 
           <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
-          <p className="text-gray-800 text-sm">
-            {author} • {new Date(publishedAt).toLocaleString()}
+          <p className="text-gray-700 font-semibold text-sm">
+             <span className='text-gray-800'>{author}</span> • {new Date(publishedAt).toLocaleString()}
           </p>
 
           {videoUrl ? (

@@ -21,7 +21,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 py-10 bg-[#DBDBDB] text-gray-800">
+    <div className="min-h-screen px-4 py-10 text-gray-800">
       <div className="max-w-4xl mx-auto space-y-10">
         {/* Heading */}
         <div className="text-center">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { BiLogoPlayStore } from "react-icons/bi";
 import {
   FaFacebookF,
   FaInstagram,
@@ -75,14 +76,14 @@ const Header = () => {
   return (
     <header>
       {/* Top Bar */}
-      <div className="bg-white text-black text-sm px-4 py-2 flex justify-between items-center">
-        <div className="flex items-center space-x-3 text-[#b6261b] text-lg">
+      <div className="bg-[#b6261b] text-[#ffffff] text-sm px-4 py-2 flex justify-between items-center">
+        <div className="flex items-center space-x-3 text-[#ffffff] text-lg">
                        <a
                 href="https://x.com/merupulu?lang=en"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+                <FaXTwitter className="text-[#ffffff] text-lg cursor-pointer hover:scale-95" />
               </a>
 
               <a
@@ -90,47 +91,60 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+                <FaYoutube className="text-[#ffffff] text-lg cursor-pointer hover:scale-95" />
               </a>
         </div>
         <div>{today}</div>
-        <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-3 py-1 rounded-full text-xs">
-          Merupulu Media Services
-        </button>
+        <a 
+           href="https://play.google.com/store/apps/datasafety?id=com.androtech.merupunews.prod"
+           target="_blank"
+           rel="noopener noreferrer"
+          >
+          <div className="bg-yellow-400 hover:bg-yellow-300 rounded-full px-3 py-1 gap-1 cursor-pointer text-black flex items-center">
+           <BiLogoPlayStore />
+        <p className=" font-semibold text-xs">
+          Download our app
+        </p>
+        </div>
+        </a>
       </div>
 
-      <h1 className="text-5xl text-center font-[ 'Poppins','Roboto Slab','Oswald','Lora','Merriweather','serif',] text-[#b6261b] font-bold py-6">
-        Merupu News
+      {/* logo */}
+      <div className="flex flex-col text-center pt-2 pb-4">
+      <h1 className="text-6xl font-ramabhadra text-[#b6261b] py-3">
+        మెరుపు న్యూస్​
       </h1>
+      <p className="text-xs font-bold text-[#b6261b]">Merupu News</p>
+      </div>
 
       {/* Navbar */}
-      <nav className="bg-white text-black">
-        <div className="flex flex-wrap justify-center items-center px-4 py-1 gap-4 text-md font-mono font-bold relative z-20">
+      <nav className="bg-[#DBDBDB] text-black">
+        <div className="flex flex-wrap justify-center items-center px-4 py-1 gap-4 text-md font-semibold relative z-20">
           <Link
             to="/"
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+            className={`cursor-pointer hover:text-[#b6261b] ${
               isExactPath("/")
                 ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
                 : ""
             }`}
           >
-            BREAKING NEWS
+            LATEST
           </Link>
 
           <Link
             to="/news/all-news"
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+            className={`cursor-pointer hover:text-[#b6261b] ${
               isExactPath("/news/all-news")
                 ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
                 : ""
             }`}
           >
-            ALL NEWS
+            TELANGANA
           </Link>
 
           <Link
             to={`/news/${allDistricts[0]}`}
-            className={`cursor-pointer hover:text-[#b61b1bf9] ${
+            className={`cursor-pointer hover:text-[#b6261b] ${
               isDistrictActive(allDistricts[0])
                 ? "underline underline-offset-8 decoration-2 text-[#b6261b]"
                 : ""
@@ -149,7 +163,7 @@ const Header = () => {
             }
           >
             <div className="flex items-center">
-              <span className="hover:text-[#b61b1bf9]">MORE</span>
+              <span className="hover:text-[#b6261b]">MORE</span>
               <MdKeyboardArrowDown size={20} />
             </div>
 

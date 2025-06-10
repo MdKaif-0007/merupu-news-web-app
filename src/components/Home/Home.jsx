@@ -18,7 +18,7 @@ const Home = () => {
 
   {/* Main News Content - Remains scrollable */}
   <main className="w-full lg:flex-1 space-y-8">
-    <NewsSection category="breaking-news" />
+    <NewsSection category="latest-news" />
     {/* Add more NewsSection components if needed */}
   </main>
 

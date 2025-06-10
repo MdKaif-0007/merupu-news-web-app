@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
 @import "tailwindcss";
 
-:root {
-   background-color: #DBDBDB;
-   color: rgba(255, 255, 255, 0.87);
+@theme { 
+  --font-ramabhadra: "Ramabhadra", sans-serif;
 }
+
+:root {
+   background-color: #ffffff;
+   color: #000000;
+}
+
+
+
 
 
 /* :root {

@@ -6,7 +6,7 @@ const About = () => {
       }, []);
 
   return (
-    <div className="min-h-screen px-4 py-10 bg-[#DBDBDB] text-gray-800">
+    <div className="min-h-screen px-4 py-10 text-gray-800">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Page Title */}
         <div className="text-center">
