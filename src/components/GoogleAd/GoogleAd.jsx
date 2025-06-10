@@ -1,30 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 const GoogleAd = () => {
   const adRef = useRef(null);
   const [error, setError] = useState(null);
-  const [adLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
     const loadAd = () => {
       try {
         if (window.adsbygoogle && adRef.current) {
           window.adsbygoogle.push({});
-          // Set a timeout to check if ad loaded after a reasonable time
-          const checkAdLoad = setTimeout(() => {
-            if (adRef.current?.querySelector('iframe')) {
-              setAdLoaded(true);
-            } else {
-              setError('Ad failed to load');
-            }
-          }, 1000);
-          return () => clearTimeout(checkAdLoad);
         }
       } catch (e) {
         console.error('AdSense error:', e);
         setError(e.message || 'Ad failed to load');
       }
     };
+
     const timeout = setTimeout(loadAd, 500);
+
     return () => clearTimeout(timeout);
   }, []);
 
@@ -33,19 +26,13 @@ const GoogleAd = () => {
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ 
-          display: 'block', 
-          width: '100%',  
-          maxWidth: '100%', 
-          height: 'auto', 
-          minHeight: adLoaded ? '280px' : '0',
-          overflow: 'hidden'
-        }}
+        style={{ display: 'block', width: '100%',  maxWidth: '100%', height: 'auto', minHeight: '280px', overflow: 'hidden' }}
         data-ad-client="ca-pub-6358427229469529"
         data-ad-slot="1184119920"
         data-ad-format="fluid"
         data-full-width-responsive="true"
       ></ins>
+
       {error && (
         <div className="text-sm text-red-500 mt-2 text-center">
           {error}
@@ -54,65 +41,8 @@ const GoogleAd = () => {
     </>
   );
 };
+
 export default GoogleAd;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useRef, useState } from 'react';
-
-// const GoogleAd = () => {
-//   const adRef = useRef(null);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const loadAd = () => {
-//       try {
-//         if (window.adsbygoogle && adRef.current) {
-//           window.adsbygoogle.push({});
-//         }
-//       } catch (e) {
-//         console.error('AdSense error:', e);
-//         setError(e.message || 'Ad failed to load');
-//       }
-//     };
-
-//     const timeout = setTimeout(loadAd, 500);
-
-//     return () => clearTimeout(timeout);
-//   }, []);
-
-//   return (
-//     <>
-//       <ins
-//         ref={adRef}
-//         className="adsbygoogle"
-//         style={{ display: 'block', width: '100%',  maxWidth: '100%', height: 'auto', minHeight: '280px', }}
-//         data-ad-client="ca-pub-6358427229469529"
-//         data-ad-slot="1184119920"
-//         data-ad-format="fluid"
-//         data-full-width-responsive="true"
-//       ></ins>
-
-//       {error && (
-//         <div className="text-sm text-red-500 mt-2 text-center">
-//           {error}
-//         </div>
-//       )}
-//     </>
-//   );
-// };
-
-// export default GoogleAd;
 
 
 

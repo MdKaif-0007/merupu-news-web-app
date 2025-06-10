@@ -115,7 +115,7 @@ const NewsDetails = () => {
     <div>
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
 
-        <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
+        <aside className="hidden w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded md:flex justify-center">
           <GoogleAd />
         </aside>
 
@@ -234,7 +234,7 @@ const NewsDetails = () => {
 
         </main>
 
-        <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
+        <aside className="hidden w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded md:flex justify-center">
           <GoogleAd />
         </aside>
       </div>
