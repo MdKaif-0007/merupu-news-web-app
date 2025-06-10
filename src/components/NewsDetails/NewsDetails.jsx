@@ -13,6 +13,7 @@ import {
 } from 'react-icons/io5';
 
 const NewsDetails = () => {
+    const imageRef = useRef(null);
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,6 +21,7 @@ const NewsDetails = () => {
   const [article, setArticle] = useState(location.state?.article || null);
   const [loading, setLoading] = useState(!article);
   const [error, setError] = useState("");
+
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -111,6 +113,20 @@ const NewsDetails = () => {
 
   const { title, author, publishedAt, url, videoUrl, content } = article;
 
+
+ 
+
+const handleImageClick = () => {
+  if (imageRef.current) {
+    if (document.fullscreenEnabled) {
+      imageRef.current.requestFullscreen().catch((err) =>
+        console.error("Failed to enter fullscreen mode:", err)
+      );
+    }
+  }
+};
+
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
@@ -179,29 +195,6 @@ const NewsDetails = () => {
                   <IoLogoWhatsapp size={20} />
                 </div>
               </a>
-
-              <a
-                href={shareUrls.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Share on LinkedIn"
-              >
-                <div className="bg-gradient-to-br from-blue-700 to-blue-900 hover:from-blue-600 hover:to-blue-800 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
-                  transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
-                  <IoLogoLinkedin size={20} />
-                </div>
-              </a>
-{/* 
-              <div 
-                onClick={handleInstagramShare}
-                className="bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
-                  transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
-                title="Copy link for Instagram"
-              >
-                <IoLogoInstagram size={20} />
-              </div> */}
             </div>
           </div>
 
@@ -219,8 +212,10 @@ const NewsDetails = () => {
           ) : (
             url && (
               <img
+                ref={imageRef}
                 src={url}
                 alt={title}
+                onClick={handleImageClick}
                 className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow transform transition duration-300 hover:scale-102"
               />
             )
@@ -250,7 +245,28 @@ export default NewsDetails;
 
 
 
+              // <a
+              //   href={shareUrls.linkedin}
+              //   target="_blank"
+              //   rel="noopener noreferrer"
+              //   title="Share on LinkedIn"
+              // >
+              //   <div className="bg-gradient-to-br from-blue-700 to-blue-900 hover:from-blue-600 hover:to-blue-800 
+              //     w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+              //     transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
+              //     <IoLogoLinkedin size={20} />
+              //   </div>
+              // </a>
 
+              // <div 
+              //   onClick={handleInstagramShare}
+              //   className="bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 
+              //     w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+              //     transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
+              //   title="Copy link for Instagram"
+              // >
+              //   <IoLogoInstagram size={20} />
+              // </div>
 
 
 

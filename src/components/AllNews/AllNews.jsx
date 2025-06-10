@@ -38,14 +38,14 @@ const AllNews = () => {
     fetchNews();
   }, [page]);
 
-  // const handleClick = (article) => {
-  //   const url = `/api/news/${article._id}`;
-  //   window.open(url, '_blank');
-  // };
-
   const handleClick = (article) => {
-    navigate(`/api/news/${article._id}`, { state: { article } });
+    const url = `/api/news/${article._id}`;
+    window.open(url, '_blank');
   };
+
+  // const handleClick = (article) => {
+  //   navigate(`/api/news/${article._id}`, { state: { article } });
+  // };
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {

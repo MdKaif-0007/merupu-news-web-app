@@ -5,7 +5,7 @@ const ScrollNewsList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const page = 2;
+  const page = 1;
 
   const fetchNews = async () => {
     try {

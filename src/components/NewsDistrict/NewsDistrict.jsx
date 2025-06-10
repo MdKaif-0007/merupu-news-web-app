@@ -47,14 +47,14 @@ const NewsDistrict = () => {
     fetchNews();
   }, [page, category]);
 
-  // const handleClick = (article) => {
-  //   const url = `/api/news/${article._id}`;
-  //   window.open(url, "_blank");
-  // };
-
   const handleClick = (article) => {
-    navigate(`/api/news/${article._id}`, { state: { article } });
+    const url = `/api/news/${article._id}`;
+    window.open(url, "_blank");
   };
+
+  // const handleClick = (article) => {
+  //   navigate(`/api/news/${article._id}`, { state: { article } });
+  // };
 
   const handlePageClick = (pg) => {
     if (pg !== page) {
