@@ -134,6 +134,12 @@ useEffect(() => {
           )}
 
           <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
+
+
+        <div>
+          <ScrollNewsList />
+        </div>
+
         </main>
 
         <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
@@ -141,9 +147,7 @@ useEffect(() => {
         </aside>
       </div>
 
-      <div>
-        <ScrollNewsList />
-      </div>
+     
     </div>
   );
 };

@@ -11,14 +11,14 @@ import { FaXTwitter } from "react-icons/fa6";
 import merupuLogo from "../../assets/merupuLogo.png";
 import { Link, useLocation } from "react-router-dom";
 
-const Footer = forwardRef((props, ref) => {
+const Footer = () => {
   const location = useLocation();
   const isAboutPage = location.pathname === "/about";
   const isContactPage = location.pathname === "/contact";
   const isprivacyPage = location.pathname === "/privacy";
 
   return (
-    <footer ref={ref} className="bg-gray-200 text-black ">
+    <footer className="bg-gray-200 text-black ">
       {/* Top Section */}
       <div className="w-full py-10 px-4">
         <div className="max-w-7xl w-full mx-auto">
@@ -108,6 +108,6 @@ const Footer = forwardRef((props, ref) => {
       </div>
     </footer>
   );
-});
+};
 
 export default Footer;

@@ -1,53 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewsSection from '../NewsSection/NewsSection';
-import NewsDetail from '../NewsDetails/NewsDetails';
-import AllNews from '../AllNews/AllNews';
 import GoogleAd from '../GoogleAd/GoogleAd';
 
 const Home = () => {
 
-     const footerRef = useRef();
-  const leftAdRef = useRef();
-
-  useEffect(() => {
-    const adBox = leftAdRef.current;
-    if (!adBox) return;
-
-    // Prevent main page scroll when scrolling inside ad box
-    const onWheel = (e) => {
-      const { scrollTop, scrollHeight, clientHeight } = adBox;
-      const delta = e.deltaY;
-
-      // Scrolling up at the top or down at the bottom should allow main page scroll,
-      // else prevent it.
-      const isAtTop = scrollTop === 0;
-      const isAtBottom = scrollTop + clientHeight >= scrollHeight;
-
-      if (
-        (delta < 0 && !isAtTop) || // scrolling up and NOT at top
-        (delta > 0 && !isAtBottom) // scrolling down and NOT at bottom
-      ) {
-        e.stopPropagation();
-        // Prevent main page scroll by preventing default only if you want
-        // e.preventDefault();
-      }
-      // Else allow scroll to propagate (to scroll main page)
-    };
-
-    adBox.addEventListener('wheel', onWheel, { passive: false });
-
-    return () => {
-      adBox.removeEventListener('wheel', onWheel);
-    };
-  }, []);
-
-  const handleAdScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    if (scrollTop + clientHeight >= scrollHeight - 1) {
-      footerRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
 
   return (
@@ -55,8 +12,6 @@ const Home = () => {
 
   {/* Left Ad Box - Sticky on large screens */}
   <aside
-  ref={leftAdRef}
- onScroll={handleAdScroll}
   className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] rounded  flex justify-center lg:sticky lg:top-4">
     <GoogleAd /> 
   </aside>
@@ -65,7 +20,6 @@ const Home = () => {
   <main className="w-full lg:flex-1 space-y-8">
     <NewsSection category="breaking-news" />
     {/* Add more NewsSection components if needed */}
-     <div ref={footerRef}></div>
   </main>
 
   {/* Right Ad Box - Sticky on large screens */}
