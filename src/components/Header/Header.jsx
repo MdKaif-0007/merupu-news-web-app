@@ -83,7 +83,7 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter className="text-[#ffffff] text-lg cursor-pointer hover:scale-95" />
+                <FaXTwitter size={20} className="text-[#ffffff] cursor-pointer hover:scale-95" />
               </a>
 
               <a
@@ -91,7 +91,7 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube className="text-[#ffffff] text-lg cursor-pointer hover:scale-95" />
+                <FaYoutube size={20} className="text-[#ffffff] cursor-pointer hover:scale-95" />
               </a>
         </div>
         <div>{today}</div>

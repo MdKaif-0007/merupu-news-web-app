@@ -38,9 +38,13 @@ const AllNews = () => {
     fetchNews();
   }, [page]);
 
+  // const handleClick = (article) => {
+  //   const url = `/api/news/${article._id}`;
+  //   window.open(url, '_blank');
+  // };
+
   const handleClick = (article) => {
-    const url = `/api/news/${article._id}`;
-    window.open(url, '_blank');
+    navigate(`/api/news/${article._id}`, { state: { article } });
   };
 
   const handlePageChange = (newPage) => {
@@ -115,7 +119,7 @@ useEffect(() => {
   return (
     <div className="flex flex-col lg:flex-row px-4 lg:px-10 py-6 gap-4">
       {/* Left Ad Box */}
-      <aside className="w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
+      <aside className="lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded flex justify-center">
         <GoogleAd />
       </aside>
 

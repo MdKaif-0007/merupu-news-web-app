@@ -40,7 +40,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+                <FaXTwitter size={20} className="text-[#b6261b] cursor-pointer hover:scale-95" />
               </a>
 
               <a
@@ -48,7 +48,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube className="text-[#b6261b] text-lg cursor-pointer hover:scale-95" />
+                <FaYoutube size={20} className="text-[#b6261b] cursor-pointer hover:scale-95" />
               </a>
             </div>
           </div>
@@ -71,7 +71,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright Strip */}
-      <div className="bg-[#b6261b] py-4 text-center text-sm text-white space-x-4 cursor-pointer">
+      <div className="bg-[#b6261b] py-4 text-center text-sm text-white space-x-4">
         <span>
           Copyright © 2025 merupulu media services : All rights reserved.
         </span>
@@ -82,6 +82,7 @@ const Footer = () => {
           onClick={(e) => {
             if (isAboutPage) e.preventDefault(); // prevent navigating again
           }}
+          className="hover:underline underline-offset-2 cursor-pointer"
         >
           <span>About</span>
         </a>
@@ -92,6 +93,7 @@ const Footer = () => {
           onClick={(e) => {
             if (isContactPage) e.preventDefault(); // prevent navigating again
           }}
+          className="hover:underline underline-offset-2 cursor-pointer"
         >
           <span>Contact</span>
         </a>
@@ -102,6 +104,7 @@ const Footer = () => {
           onClick={(e) => {
             if (isprivacyPage) e.preventDefault(); // prevent navigating again
           }}
+          className="hover:underline underline-offset-2 cursor-pointer"
         >
           <span>Privacy Policy</span>
         </a>

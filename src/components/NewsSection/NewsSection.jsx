@@ -36,9 +36,13 @@ const NewsSection = ({ category }) => {
     fetchNews();
   }, [page, category]);
 
+  // const handleClick = (article) => {
+  //   const url = `/api/news/${article._id}`;
+  //   window.open(url, '_blank');
+  // };
+
   const handleClick = (article) => {
-    const url = `/api/news/${article._id}`;
-    window.open(url, '_blank');
+    navigate(`/api/news/${article._id}`, { state: { article } });
   };
 
   const handlePageChange = (newPage) => {
