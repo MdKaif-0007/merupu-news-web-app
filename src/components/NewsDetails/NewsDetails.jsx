@@ -19,6 +19,12 @@ const NewsDetails = () => {
   const [article, setArticle] = useState(location.state?.article || null);
   const [loading, setLoading] = useState(!article);
   const [error, setError] = useState("");
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    // Set current URL after component mounts (client-side)
+    setCurrentUrl(window.location.href);
+  }, []);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -53,60 +59,44 @@ const NewsDetails = () => {
   }, [id]);
 
   const getShareUrls = () => {
-    if (!article) return {};
+    if (!article || !currentUrl) return {};
 
-    const currentUrl = encodeURIComponent(window.location.href);
+    const encodedUrl = encodeURIComponent(currentUrl);
     const title = encodeURIComponent(article.title);
-    const description = encodeURIComponent(
-      (article.content?.substring(0, 150) || "") + "..."
-    );
-    const imageUrl = encodeURIComponent(article.url || "");
 
     return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}&quote=${title}%0A${description}`,
-      twitter: `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}`,
-      whatsapp: `https://wa.me/?text=${title}%0A${description}%0A${currentUrl}`
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${title}`,
+      whatsapp: `https://wa.me/?text=${title}%0A${encodedUrl}`
     };
   };
 
   const shareUrls = getShareUrls();
 
   const handleNativeShare = async () => {
-    if (!article) return;
-
-    const currentUrl = window.location.href;
-    const imageUrl = article.url;
+    if (!article || !currentUrl) return;
 
     try {
-      if (navigator.canShare && navigator.canShare({ files: [] }) && imageUrl) {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-        const file = new File([blob], "article-image.jpg", { type: blob.type });
-
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: article.title,
-            text: article.content?.substring(0, 150) + "...",
-            url: currentUrl,
-            files: [file],
-          });
-          return;
-        }
-      }
-
       if (navigator.share) {
         await navigator.share({
           title: article.title,
-          text: article.content?.substring(0, 150) + "...",
           url: currentUrl,
         });
       } else {
+        // Fallback to clipboard
         await navigator.clipboard.writeText(currentUrl);
         alert("Link copied to clipboard!");
       }
     } catch (err) {
       console.log("Error sharing:", err);
-      alert("Sharing failed.");
+      // Fallback to clipboard if sharing fails
+      try {
+        await navigator.clipboard.writeText(currentUrl);
+        alert("Link copied to clipboard!");
+      } catch (clipboardErr) {
+        console.log("Clipboard access failed:", clipboardErr);
+        alert("Sharing failed. Please copy the URL manually.");
+      }
     }
   };
 
@@ -136,16 +126,25 @@ const NewsDetails = () => {
     <div>
       <Helmet>
         <title>{title}</title>
+        {/* Open Graph tags for social media sharing */}
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={content?.substring(0, 150) + "..."} />
-        <meta property="og:image" content={url} />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:image" content={url || ''} />
+        <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
-
+        <meta property="og:site_name" content="Merupu News" />
+        
+        {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={content?.substring(0, 150) + "..."} />
-        <meta name="twitter:image" content={url} />
+        <meta name="twitter:image" content={url || ''} />
+        <meta name="twitter:site" content="@MerupuNews" />
+        
+        {/* Additional meta tags for better sharing */}
+        <meta property="article:author" content={author} />
+        <meta property="article:published_time" content={publishedAt} />
+        
+        {/* Ensure image is accessible */}
+        <link rel="preload" as="image" href={url} />
       </Helmet>
 
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
@@ -164,26 +163,26 @@ const NewsDetails = () => {
             <div className="flex flex-wrap gap-4">
               <div
                 onClick={handleNativeShare}
-                className="bg-gray-100 w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-black hover:scale-105 shadow-lg"
+                className="bg-gray-100 w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-black hover:scale-105 shadow-lg transition-transform"
                 title="Share or Copy Link"
               >
                 <IoShareSocial size={20} />
               </div>
 
               <a href={shareUrls.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
-                <div className="bg-blue-600 w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs">
+                <div className="bg-blue-600 w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs transition-transform">
                   <IoLogoFacebook size={20} />
                 </div>
               </a>
 
               <a href={shareUrls.twitter} target="_blank" rel="noopener noreferrer" title="Twitter">
-                <div className="bg-black w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs">
+                <div className="bg-black w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs transition-transform">
                   <FaXTwitter size={20} />
                 </div>
               </a>
 
               <a href={shareUrls.whatsapp} target="_blank" rel="noopener noreferrer" title="WhatsApp">
-                <div className="bg-green-500 w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs">
+                <div className="bg-green-500 w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs transition-transform">
                   <IoLogoWhatsapp size={20} />
                 </div>
               </a>
@@ -195,6 +194,7 @@ const NewsDetails = () => {
               src={videoUrl}
               className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow"
               controls
+              poster={url} // Use article image as video poster
             />
           ) : (
             url && (
@@ -203,7 +203,9 @@ const NewsDetails = () => {
                 src={url}
                 alt={title}
                 onClick={handleImageClick}
-                className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow hover:scale-102 transition duration-300"
+                className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow hover:scale-102 transition duration-300 cursor-pointer"
+                loading="eager" // Load image immediately for sharing
+                // crossOrigin="anonymous" // Help with CORS issues
               />
             )
           )}
