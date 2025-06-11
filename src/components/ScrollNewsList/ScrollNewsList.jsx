@@ -43,7 +43,7 @@ const ScrollNewsList = () => {
               className="overflow-hidden cursor-pointer border-b-[1px] border-gray-300 "
             >
               <div className="p-4 hover:scale-102 transition-transform duration-200">
-                <h3 className="text-lg text-gray-900 hover:text-[#b61b1bf9] font-bold mb-2">{item.title}</h3>
+                <h3 className="text-lg text-blue-600 hover:text-[#b61b1bf9] font-bold mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-700 font-semibold">
                  <span className='text-gray-800'>{item.author}</span> • {new Date(item.publishedAt).toLocaleString()}
                 </p>
