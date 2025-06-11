@@ -11,6 +11,7 @@ import {
   IoLogoInstagram, 
   IoLogoLinkedin 
 } from 'react-icons/io5';
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const NewsDetails = () => {
     const imageRef = useRef(null);
@@ -57,47 +58,105 @@ const NewsDetails = () => {
   }, [id]);
 
   // Generate share URLs
-  const getShareUrls = () => {
-    if (!article) return {};
+  // const getShareUrls = () => {
+  //   if (!article) return {};
 
-    const currentUrl = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(article.title);
-    const description = encodeURIComponent(article.content?.substring(0, 150) + '...' || '');
+  //   const currentUrl = encodeURIComponent(window.location.href);
+  //   const title = encodeURIComponent(article.title);
+  //   const description = encodeURIComponent(article.content?.substring(0, 150) + '...' || '');
     
-    return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}&quote=${title}`,
-      twitter: `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}&via=YourNewsHandle`,
-      whatsapp: `https://wa.me/?text=${title}%20${currentUrl}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}&title=${title}&summary=${description}`
-    };
-  };
-
-  // Handle native share and clipboard copy
-  const handleNativeShare = () => {
-    if (!article) return;
-    
-    const currentUrl = window.location.href;
-    
-    if (navigator.share) {
-      navigator.share({
-        title: article.title,
-        text: article.content?.substring(0, 150) + '...',
-        url: currentUrl
-      }).catch(err => console.log('Error sharing:', err));
-    } else {
-      navigator.clipboard.writeText(currentUrl).then(() => {
-        alert('Link copied to clipboard!');
-      });
-    }
-  };
-
-  // const handleInstagramShare = () => {
-  //   navigator.clipboard.writeText(window.location.href).then(() => {
-  //     alert('Link copied! You can now paste it in your Instagram story or bio.');
-  //   });
+  //   return {
+  //     facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}&quote=${title}`,
+  //     twitter: `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}&via=YourNewsHandle`,
+  //     whatsapp: `https://wa.me/?text=${title}%20${currentUrl}`,
+  //     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}&title=${title}&summary=${description}`
+  //   };
   // };
 
-  const shareUrls = getShareUrls();
+  const getShareUrls = () => {
+  if (!article) return {};
+
+  const currentUrl = encodeURIComponent(window.location.href);
+  const title = encodeURIComponent(article.title);
+  const description = encodeURIComponent(
+    (article.content?.substring(0, 150) || "") + "..."
+  );
+  const imageUrl = encodeURIComponent(article.url || "");
+
+  return {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}&quote=${title}%0A${description}%0A${imageUrl}`,
+    twitter: `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}%0A${imageUrl}`,
+    whatsapp: `https://wa.me/?text=${title}%0A${description}%0A${currentUrl}%0A${imageUrl}`,
+    // linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}&title=${title}&summary=${description}&source=${imageUrl}`,
+  };
+};
+
+const shareUrls = getShareUrls();
+
+
+  
+
+  // Handle native share and clipboard copy
+  // const handleNativeShare = () => {
+  //   if (!article) return;
+    
+  //   const currentUrl = window.location.href;
+    
+  //   if (navigator.share) {
+  //     navigator.share({
+  //       title: article.title,
+  //       text: article.content?.substring(0, 150) + '...',
+  //       url: currentUrl
+  //     }).catch(err => console.log('Error sharing:', err));
+  //   } else {
+  //     navigator.clipboard.writeText(currentUrl).then(() => {
+  //       alert('Link copied to clipboard!');
+  //     });
+  //   }
+  // };
+
+  const handleNativeShare = async () => {
+  if (!article) return;
+
+  const currentUrl = window.location.href;
+  const imageUrl = article.url;
+
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [] }) && imageUrl) {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const file = new File([blob], "article-image.jpg", { type: blob.type });
+
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: article.title,
+          text: article.content?.substring(0, 150) + "...",
+          url: currentUrl,
+          files: [file],
+        });
+        return;
+      }
+    }
+
+    // Fallback for browsers that don't support image sharing
+    if (navigator.share) {
+      await navigator.share({
+        title: article.title,
+        text: article.content?.substring(0, 150) + "...",
+        url: currentUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(currentUrl);
+      alert("Link copied to clipboard!");
+    }
+  } catch (err) {
+    console.log("Error sharing:", err);
+    alert("Sharing failed.");
+  }
+};
+
+
+  
 
   if (loading) {
     return <p className="text-center mt-10 text-gray-800">Loading article...</p>;
@@ -136,12 +195,17 @@ const handleImageClick = () => {
         </aside>
 
         <main className="w-full lg:w-3/5 max-w-3xl space-y-6">
-          <button
+          {/* <button
             onClick={() => navigate("/")}
             className="mb-4 px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-600"
           >
             ← Home
-          </button>
+          </button> */}
+
+          <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
+          <p className="text-gray-700 font-semibold text-sm">
+            <span className='text-gray-800'>{author}</span> • {new Date(publishedAt).toLocaleString()}
+          </p>
 
           {/* Social sharing section */}
           <div className="mb-12">
@@ -149,22 +213,21 @@ const handleImageClick = () => {
             <div className="flex flex-wrap gap-4">
               <div 
                 onClick={handleNativeShare}
-                className="bg-gradient-to-br from-gray-600 to-gray-800 hover:from-gray-500 hover:to-gray-700 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+                className="bg-gray-100 
+                  w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-black
                   transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
                 title="Share or Copy Link"
               >
                 <IoShareSocial size={20} />
               </div>
-              
               <a
                 href={shareUrls.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Share on Facebook"
               >
-                <div className="bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+                <div className="bg-blue-600 
+                  w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-white
                   transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
                   <IoLogoFacebook size={20} />
                 </div>
@@ -176,8 +239,8 @@ const handleImageClick = () => {
                 rel="noopener noreferrer"
                 title="Share on Twitter/X"
               >
-                <div className="bg-gradient-to-br from-slate-900 to-black hover:from-slate-800 hover:to-gray-900 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+                <div className="bg-slate-900 
+                  w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-white
                   transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
                   <FaXTwitter size={20}/>
                 </div>
@@ -189,19 +252,14 @@ const handleImageClick = () => {
                 rel="noopener noreferrer"
                 title="Share on WhatsApp"
               >
-                <div className="bg-gradient-to-br from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 
-                  w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer text-white
+                <div className="bg-green-500 
+                  w-10 h-10 rounded-xs flex items-center justify-center cursor-pointer text-white
                   transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
                   <IoLogoWhatsapp size={20} />
                 </div>
               </a>
             </div>
           </div>
-
-          <h1 className="text-gray-900 text-3xl font-bold">{title}</h1>
-          <p className="text-gray-700 font-semibold text-sm">
-            <span className='text-gray-800'>{author}</span> • {new Date(publishedAt).toLocaleString()}
-          </p>
 
           {videoUrl ? (
             <video

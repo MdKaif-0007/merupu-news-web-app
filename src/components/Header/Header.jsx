@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
+import { IoMdHome } from "react-icons/io";
 
 const Header = () => {
   const location = useLocation();
@@ -76,7 +77,7 @@ const Header = () => {
   // Check if current path is a news details page (contains /news/ followed by an ID)
   const isNewsDetailsPage = () => {
     // This regex checks for paths like /news/[id] where id is typically a long string
-     const newsDetailsPattern = /^\/api\/news\/[a-zA-Z0-9]{20,}$/;
+    const newsDetailsPattern = /^\/api\/news\/[a-zA-Z0-9]{20,}$/;
     return newsDetailsPattern.test(location.pathname);
   };
 
@@ -85,29 +86,37 @@ const Header = () => {
       {/* Top Bar */}
       <div className="bg-[#b6261b] text-[#ffffff] text-sm px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-3 text-[#ffffff] text-lg">
-          <a
-            href="https://x.com/merupulu?lang=en"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaXTwitter
-              size={20}
-              className="text-[#ffffff] cursor-pointer hover:scale-95"
-            />
-          </a>
-
-          <a
-            href="https://www.youtube.com/@merupulu"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaYoutube
-              size={20}
-              className="text-[#ffffff] cursor-pointer hover:scale-95"
-            />
-          </a>
+          {isNewsDetailsPage() ? (
+            <Link to="/" className="text-white hover:text-yellow-300">
+              <IoMdHome size={24}/>
+            </Link>
+          ) : (
+            <>
+              <a
+                href="https://x.com/merupulu?lang=en"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaXTwitter
+                  size={20}
+                  className="text-[#ffffff] cursor-pointer hover:scale-95"
+                />
+              </a>
+              <a
+                href="https://www.youtube.com/@merupulu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube
+                  size={20}
+                  className="text-[#ffffff] cursor-pointer hover:scale-95"
+                />
+              </a>
+            </>
+          )}
         </div>
-        <div>{today}</div>
+
+        <div className="font-semibold">{today}</div>
         <a
           href="https://play.google.com/store/apps/details?id=com.androtech.merupunews.prod"
           target="_blank"
@@ -211,12 +220,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import { Link, useLocation } from "react-router-dom";
@@ -395,7 +398,7 @@ export default Header;
 
 //             {/* Dropdown Menu */}
 //             <div
-//               className={`absolute right-0 md:left-0 mt-0 bg-white text-black rounded shadow-lg min-w-max z-30 max-h-72 overflow-y-auto 
+//               className={`absolute right-0 md:left-0 mt-0 bg-white text-black rounded shadow-lg min-w-max z-30 max-h-72 overflow-y-auto
 //               ${
 //                 isMobileView
 //                   ? isMobileDropdownOpen
