@@ -37,14 +37,24 @@
   const fetchArticle = async () => {
     try {
       // ✅ Extract ID from the URL path (e.g. /news/1234)
-      const pathSegments = window.location.pathname.split('/');
-      const id = pathSegments[pathSegments.length - 1];
-      console.log(id)
+      // const pathSegments = window.location.pathname.split('/');
+      // const id = pathSegments[pathSegments.length - 1];
+      // console.log(id)
 
-      if (!id) {
+      // if (!id) {
+      //   console.error("Article ID not found in URL");
+      //   return;
+      // }
+
+
+      const pathSegments = window.location.pathname.split('/').filter(Boolean); // remove empty
+      const id = pathSegments[pathSegments.length - 1];
+
+      if (!id || id === 'share') {
         console.error("Article ID not found in URL");
         return;
       }
+
 
       // Optional: check if article data exists in location.state (React-specific)
       const articleFromState = history.state?.usr?.article;
