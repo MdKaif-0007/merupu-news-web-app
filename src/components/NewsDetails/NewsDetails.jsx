@@ -80,6 +80,7 @@ const NewsDetails = () => {
       if (navigator.share) {
         await navigator.share({
           title: article.title,
+          text: `${article.title} - Read more on Merupu News`,
           url: currentUrl,
         });
       } else {
