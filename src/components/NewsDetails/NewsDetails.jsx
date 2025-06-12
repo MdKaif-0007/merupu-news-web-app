@@ -22,7 +22,6 @@ const NewsDetails = () => {
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
-    // Set current URL after component mounts (client-side)
     setCurrentUrl(window.location.href);
   }, []);
 
