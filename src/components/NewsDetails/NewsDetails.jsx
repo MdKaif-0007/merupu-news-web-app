@@ -129,7 +129,7 @@ const NewsDetails = () => {
                 </div>
               </TwitterShareButton>
 
-              <WhatsappShareButton url={currentUrl} title={title} separator=" :: ">
+              <WhatsappShareButton url={currentUrl && url} title={title} separator=" :: ">
                 <div className="bg-green-500 w-10 h-10 flex items-center justify-center text-white hover:scale-105 shadow-lg rounded-xs transition-transform">
                   <IoLogoWhatsapp size={20} />
                 </div>
