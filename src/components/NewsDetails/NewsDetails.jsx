@@ -128,8 +128,7 @@ const NewsDetails = () => {
         <title>{title}</title>
         {/* Open Graph tags for social media sharing */}
         <meta property="og:title" content={title} />
-        {/* <meta property="og:image" content={url || ''} /> */}
-        <meta property="og:image" content={url || "https://news.merupulu.com/default-og-image.jpg"} />
+        <meta property="og:image" content={url || ''} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Merupu News" />
@@ -147,7 +146,7 @@ const NewsDetails = () => {
         
         {/* Ensure image is accessible */}
         <link rel="preload" as="image" href={url} />
-      </Helmet>
+      </Helmet> 
 
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
         <aside className="hidden w-full lg:w-1/5 bg-transparent h-40 lg:h-[800px] lg:sticky lg:top-4 rounded md:flex justify-center">

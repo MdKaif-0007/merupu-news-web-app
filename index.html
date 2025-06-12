@@ -4,26 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="/merupuLogo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <Helmet>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta property="og:image" content="article image"/>
-        <meta property="og:image" content="article image"/>
-        <meta property="og:url" content={currentUrl} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Merupu News" />
-        
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:image" content="article image"/>
-        <meta name="twitter:site" content="@MerupuNews" />
-       
-        <meta property="article:author" content={author} />
-        <meta property="article:published_time" content={publishedAt} />
-        
-        <link rel="preload" as="image" href={url} />
-      </Helmet>
+    
+
+  <!-- <meta property="og:image" content= "https://firebasestorage.googleapis.com/v0/b/merupu…=media&token=0269bee6-8f16-441a-b5ce-72acd2033699" /> -->
+
+
+    <meta property="og:image" content= result.url />
+
+     <!-- <meta property="og:title" content= result.title />
+    
+    <meta property="og:url" content="https://api/news/id" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Merupu News" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Your Dynamic Article Title" />
+    <meta name="twitter:image" content="https://your-cdn.com/image.jpg" /> -->
+   
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6358427229469529"
@@ -37,4 +33,49 @@
   </body>
 </html>
 
+<script>
+  const fetchArticle = async () => {
+    try {
+      // ✅ Extract ID from the URL path (e.g. /news/1234)
+      const pathSegments = window.location.pathname.split('/');
+      const id = pathSegments[pathSegments.length - 1];
+      console.log(id)
 
+      if (!id) {
+        console.error("Article ID not found in URL");
+        return;
+      }
+
+      // Optional: check if article data exists in location.state (React-specific)
+      const articleFromState = history.state?.usr?.article;
+
+      if (articleFromState && articleFromState._id === id) {
+        console.log("Using article from state:", articleFromState);
+        return;
+      }
+
+      // ✅ Fetch from backend using the ID
+      const res = await fetch(`https://merupu-news.onrender.com/api/news/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch article.");
+      const result = await res.json();
+
+      if (!result || Object.keys(result).length === 0) {
+        throw new Error("Article not found.");
+      }
+
+      console.log("Fetched article:", result);
+
+      console.log(result.url);
+    } catch (err) {
+      console.log(err.message || "Error loading article.");
+    }
+  };
+
+  fetchArticle();
+</script>
+
+
+
+
+
+      
