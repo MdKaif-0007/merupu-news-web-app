@@ -128,7 +128,8 @@ const NewsDetails = () => {
         <title>{title}</title>
         {/* Open Graph tags for social media sharing */}
         <meta property="og:title" content={title} />
-        <meta property="og:image" content={url || ''} />
+        {/* <meta property="og:image" content={url || ''} /> */}
+        <meta property="og:image" content={url || "https://news.merupulu.com/default-og-image.jpg"} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Merupu News" />
