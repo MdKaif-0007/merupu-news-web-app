@@ -22,7 +22,8 @@ const NewsDetails = () => {
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
-    setCurrentUrl(window.location.href);
+    //setCurrentUrl(window.location.href);
+    setCurrentUrl(`https://news.merupulu.com/api/news/${id}`);
   }, []);
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const NewsDetails = () => {
       if (navigator.share) {
         await navigator.share({
           title: article.title,
-          text: `${article.title} - Read more on Merupu News`,
+          text: `${article.title}`,
           url: currentUrl,
         });
       } else {
