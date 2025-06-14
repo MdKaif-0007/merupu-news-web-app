@@ -107,44 +107,38 @@ const NewsDetails = () => {
     }
   };
 
-  // Ensure image URL is absolute for proper sharing
-  const absoluteImageUrl = url ? (url.startsWith('http') ? url : `https://merupu-news.onrender.com${url}`) : '';
-  
-  // Create a description for better social media sharing
-  const description = content ? content.substring(0, 160) + '...' : title;
+   const getAbsoluteImageUrl = (relativeUrl) => {
+    if (!relativeUrl) return '';
+    if (relativeUrl.startsWith('http')) return relativeUrl;
+    return `${window.location.origin}${relativeUrl}`;
+  };
+
+  const shareImageUrl = getAbsoluteImageUrl(url);
+  const siteUrl = window.location.origin;
 
   return (
     <div>
+
       <Helmet>
         <title>{title}</title>
-        <meta name="description" content={description} />
-        
-        {/* Open Graph tags for Facebook */}
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={absoluteImageUrl} />
+        <meta property="og:image" content={shareImageUrl} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
+        <meta property="og:description" content={content?.substring(0, 160) || title} />
         <meta property="og:site_name" content="Merupu News" />
         
-        {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={absoluteImageUrl} />
+        <meta name="twitter:description" content={content?.substring(0, 160) || title} />
+        <meta name="twitter:image" content={shareImageUrl} />
         <meta name="twitter:site" content="@MerupuNews" />
         
-        {/* Article specific tags */}
         <meta property="article:author" content={author} />
         <meta property="article:published_time" content={publishedAt} />
-        
-        {/* WhatsApp specific tags */}
-        <meta property="og:image:alt" content={title} />
-        
-        <link rel="preload" as="image" href={absoluteImageUrl} />
-        <link rel="canonical" href={currentUrl} />
+        <link rel="preload" as="image" href={shareImageUrl} />
       </Helmet>
 
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
@@ -169,27 +163,15 @@ const NewsDetails = () => {
                 <IoShareSocial size={20} />
               </div>
 
-              <FacebookShareButton 
-                url={currentUrl} 
-                quote={title} 
-                hashtag="#MerupuNews"
-              >
+              <FacebookShareButton url={currentUrl} quote={title} hashtag="#MerupuNews">
                 <FacebookIcon size={40} round />
               </FacebookShareButton>
 
-              <TwitterShareButton 
-                url={currentUrl} 
-                title={title}
-                hashtags={["MerupuNews", "News"]}
-              >
+              <TwitterShareButton url={currentUrl} title={title}>
                 <TwitterIcon size={40} round />
               </TwitterShareButton>
 
-              <WhatsappShareButton 
-                url={currentUrl} 
-                title={title}
-                separator=" - "
-              >
+              <WhatsappShareButton url={currentUrl} title={title}>
                 <WhatsappIcon size={40} round />
               </WhatsappShareButton>
             </div>
@@ -200,13 +182,13 @@ const NewsDetails = () => {
               src={videoUrl}
               className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow"
               controls
-              poster={absoluteImageUrl}
+              poster={url}
             />
           ) : (
-            absoluteImageUrl && (
+            url && (
               <img
                 ref={imageRef}
-                src={absoluteImageUrl}
+                src={url}
                 alt={title}
                 onClick={handleImageClick}
                 className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow hover:scale-102 transition duration-300 cursor-pointer"
