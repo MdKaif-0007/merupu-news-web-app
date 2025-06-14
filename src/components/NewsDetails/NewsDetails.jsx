@@ -106,39 +106,23 @@ const NewsDetails = () => {
       );
     }
   };
-
-   const getAbsoluteImageUrl = (relativeUrl) => {
-    if (!relativeUrl) return '';
-    if (relativeUrl.startsWith('http')) return relativeUrl;
-    return `${window.location.origin}${relativeUrl}`;
-  };
-
-  const shareImageUrl = getAbsoluteImageUrl(url);
-  const siteUrl = window.location.origin;
+  
 
   return (
     <div>
-
       <Helmet>
         <title>{title}</title>
         <meta property="og:title" content={title} />
-        <meta property="og:image" content={shareImageUrl} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image" content={url || ''} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:description" content={content?.substring(0, 160) || title} />
         <meta property="og:site_name" content="Merupu News" />
-        
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={content?.substring(0, 160) || title} />
-        <meta name="twitter:image" content={shareImageUrl} />
-        <meta name="twitter:site" content="@MerupuNews" />
-        
+        <meta name="twitter:image" content={url || ''} />
         <meta property="article:author" content={author} />
         <meta property="article:published_time" content={publishedAt} />
-        <link rel="preload" as="image" href={shareImageUrl} />
+        <link rel="preload" as="image" href={url} />
       </Helmet>
 
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
