@@ -30,7 +30,7 @@ const ScrollNewsList = () => {
 
   return (
     <div className="w-full px-6 pt-6 pb-4 rounded-xl">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">Suggestions</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Recent News</h2>
 
       {loading ? (
         <p className="text-white">Loading...</p>
