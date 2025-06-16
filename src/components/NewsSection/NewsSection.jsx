@@ -159,7 +159,15 @@ const NewsSection = ({ category }) => {
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-700 font-semibold mt-1">
-                  <span className='text-gray-800'>{item.author}</span> • {new Date(item.publishedAt).toLocaleString()}
+                  <span className='text-gray-800'>{item.author}</span> • {new Date(item.publishedAt).toLocaleString(
+                    "en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }
+                  )}
                 </p>
                 <p className="text-gray-600 mt-2">
                   {item.content?.substring(0, 120)}...

@@ -14,7 +14,8 @@ import NewsDistrict from "./components/NewsDistrict/NewsDistrict";
 import ContactUs from "./components/Links/ContactUs";
 import About from "./components/Links/About";
 import PrivacyPolicy from "./components/Links/PrivacyPolicy";
-// import ScrollNewsDetails from "./components/ScrollNewsDetails/ScrollNewsDetails";
+import NewsCategory from "./components/NewsCategory/NewsCategory";
+
 
 
 
@@ -26,9 +27,10 @@ function App() {
 
         <Route path="/news/:category" element={<NewsDistrict />} />
         <Route path="/api/news/:id" element={<NewsDetails />} />
-        {/* <Route path="/api/news/:id" element={<ScrollNewsDetails />} /> */}
 
         <Route path="/news/all-news" element={<AllNews/>} />
+
+        <Route path="/news/category/:category" element={<NewsCategory/>} />
 
         <Route path="/contact" element={<ContactUs/>} />
         <Route path="/about" element={<About/>} />
