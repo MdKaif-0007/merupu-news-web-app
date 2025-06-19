@@ -57,18 +57,33 @@ const NewsDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
+  // const getShareUrls = () => {
+  //   if (!article || !currentUrl) return {};
+
+  //   const encodedUrl = encodeURIComponent(currentUrl);
+  //   const title = encodeURIComponent(article.title);
+
+  //   return {
+  //     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+  //     twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${title}`,
+  //     whatsapp: `https://wa.me/?text=${title}%0A${encodedUrl}`
+  //   };
+  // };
+
+
   const getShareUrls = () => {
-    if (!article || !currentUrl) return {};
+  if (!article || !id) return {};
 
-    const encodedUrl = encodeURIComponent(currentUrl);
-    const title = encodeURIComponent(article.title);
+  const shareLink = `https://merupu.news/share/news/${id}`;
+  const encodedUrl = encodeURIComponent(shareLink);
+  const title = encodeURIComponent(article.title);
 
-    return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-      twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${title}`,
-      whatsapp: `https://wa.me/?text=${title}%0A${encodedUrl}`
-    };
-  };
+  return {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${title}`,
+    whatsapp: `https://wa.me/?text=${title}%0A${encodedUrl}`,
+  };
+};
 
   const shareUrls = getShareUrls();
 
