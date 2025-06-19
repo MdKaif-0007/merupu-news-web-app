@@ -120,7 +120,8 @@ const NewsDetails = () => {
   if (!article || !id) return;
 
   const shareLink = `https://merupu.news/share/news/${id}`;
-  const shareTitle = article.title || "Merupu News";
+  //const shareTitle = article.title || "Merupu News";
+  const shareTitle = `${article.title}`;
   // const shareText = article.content?.substring(0, 150) + '...' || shareTitle;
   // const shareImage = article.url; // Ensure this is a public image URL (CORS-enabled)
 
