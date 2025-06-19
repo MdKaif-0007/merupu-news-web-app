@@ -121,14 +121,14 @@ const NewsDetails = () => {
 
   const shareLink = `https://merupu.news/share/news/${id}`;
   const shareTitle = article.title || "Merupu News";
-  const shareText = article.content?.substring(0, 150) + '...' || shareTitle;
-  const shareImage = article.url; // Ensure this is a public image URL (CORS-enabled)
+  // const shareText = article.content?.substring(0, 150) + '...' || shareTitle;
+  // const shareImage = article.url; // Ensure this is a public image URL (CORS-enabled)
 
   try {
     if (navigator.share) {
       const shareData = {
         title: shareTitle,
-        text: shareText,
+        //text: shareText,
         url: shareLink
       };
 
