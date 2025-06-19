@@ -87,33 +87,75 @@ const NewsDetails = () => {
 
   const shareUrls = getShareUrls();
 
-  const handleNativeShare = async () => {
-    if (!article || !currentUrl) return;
+  // const handleNativeShare = async () => {
+  //   if (!article || !currentUrl) return;
 
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: article.title,
-          text: `${article.title}`,
-          url: currentUrl,
-        });
-      } else {
-        // Fallback to clipboard
-        await navigator.clipboard.writeText(currentUrl);
-        alert("Link copied to clipboard!");
-      }
-    } catch (err) {
-      console.log("Error sharing:", err);
-      // Fallback to clipboard if sharing fails
-      try {
-        await navigator.clipboard.writeText(currentUrl);
-        alert("Link copied to clipboard!");
-      } catch (clipboardErr) {
-        console.log("Clipboard access failed:", clipboardErr);
-        alert("Sharing failed. Please copy the URL manually.");
-      }
+  //   try {
+  //     if (navigator.share) {
+  //       await navigator.share({
+  //         title: article.title,
+  //         text: `${article.title}`,
+  //         url: currentUrl,
+  //       });
+  //     } else {
+  //       // Fallback to clipboard
+  //       await navigator.clipboard.writeText(currentUrl);
+  //       alert("Link copied to clipboard!");
+  //     }
+  //   } catch (err) {
+  //     console.log("Error sharing:", err);
+  //     // Fallback to clipboard if sharing fails
+  //     try {
+  //       await navigator.clipboard.writeText(currentUrl);
+  //       alert("Link copied to clipboard!");
+  //     } catch (clipboardErr) {
+  //       console.log("Clipboard access failed:", clipboardErr);
+  //       alert("Sharing failed. Please copy the URL manually.");
+  //     }
+  //   }
+  // };
+
+
+  const handleNativeShare = async () => {
+  if (!article || !id) return;
+
+  const shareLink = `https://merupu.news/share/news/${id}`;
+  const shareTitle = article.title || "Merupu News";
+  const shareText = article.content?.substring(0, 150) + '...' || shareTitle;
+  const shareImage = article.url; // Ensure this is a public image URL (CORS-enabled)
+
+  try {
+    if (navigator.share) {
+      const shareData = {
+        title: shareTitle,
+        text: shareText,
+        url: shareLink
+      };
+
+      // Some browsers (e.g., Chrome on Android) support sharing files/images.
+      // However, `navigator.share` does **not** yet support image URLs directly.
+      // So, we can only include title, text, and URL.
+
+      await navigator.share(shareData);
+    } else {
+      // Fallback to clipboard
+      await navigator.clipboard.writeText(shareLink);
+      alert("Link copied to clipboard!");
     }
-  };
+  } catch (err) {
+    console.log("Error sharing:", err);
+    // Fallback to clipboard if sharing fails
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      alert("Link copied to clipboard!");
+    } catch (clipboardErr) {
+      console.log("Clipboard access failed:", clipboardErr);
+      alert("Sharing failed. Please copy the URL manually.");
+    }
+  }
+};
+
+
 
   if (loading) {
     return <p className="text-center mt-10 text-gray-800">Loading article...</p>;
