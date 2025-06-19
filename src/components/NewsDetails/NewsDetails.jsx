@@ -128,8 +128,8 @@ const NewsDetails = () => {
   try {
     if (navigator.share) {
       const shareData = {
-        title: shareTitle,
-        //text: shareText,
+        //title: shareTitle,
+        text: shareTitle,
         url: shareLink
       };
 
