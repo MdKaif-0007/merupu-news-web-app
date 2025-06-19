@@ -263,7 +263,7 @@ const NewsDetails = () => {
                 alt={title}
                 onClick={handleImageClick}
                 className="w-full h-[300px] md:h-[400px] object-cover rounded-md shadow hover:scale-102 transition duration-300 cursor-pointer"
-                loading="eager" // Load image immediately for sharing
+                //loading="eager" // Load image immediately for sharing
                 // crossOrigin="anonymous" // Help with CORS issues
               />
             )
