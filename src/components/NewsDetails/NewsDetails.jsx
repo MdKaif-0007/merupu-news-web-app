@@ -254,14 +254,14 @@ const NewsDetails = () => {
 
           <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
 
-          {additionalContent &&
+          {/* {additionalContent &&
             additionalContent.split("\r\n\r\n").map((para, index) => (
               <p key={index} className="text-lg text-gray-700 leading-relaxed">
                 {para}
               </p>
-          ))}
+          ))} */}
 
-          {/* {additionalContent &&
+          {additionalContent &&
             additionalContent.split("\r\n\r\n").map((para, index, arr) => {
               const trimmedPara = para.trim();
 
@@ -284,7 +284,7 @@ const NewsDetails = () => {
                   {trimmedPara}
                 </p>
               );
-            })} */}
+            })}
 
           {keywords && keywords.trim() && (
             <div className="flex flex-wrap gap-2">
