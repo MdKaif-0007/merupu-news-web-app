@@ -7,6 +7,7 @@ import {
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoMdHome } from "react-icons/io";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Header = () => {
   const location = useLocation();
@@ -159,6 +160,8 @@ const Header = () => {
               TELANGANA
             </Link>
 
+            
+
             <Link
               to="/news/category/andhra-pradesh"
               className={`cursor-pointer hover:text-[#b6261b] ${
@@ -167,7 +170,7 @@ const Header = () => {
                   : ""
               }`}
             >
-              ANDHRA PRADESH
+              AP
             </Link>
 
             <Link
@@ -191,8 +194,9 @@ const Header = () => {
               }
             >
               <div className="flex items-center">
-                <span className="hover:text-[#b6261b]">MORE</span>
-                <MdKeyboardArrowDown size={20} />
+                {/* <span className="hover:text-[#b6261b]">MORE</span> */}
+                <RxHamburgerMenu size={20}/>
+                {/* <MdKeyboardArrowDown size={20} /> */}
               </div>
 
               <div

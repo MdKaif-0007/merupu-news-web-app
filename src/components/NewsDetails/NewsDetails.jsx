@@ -92,10 +92,6 @@ const NewsDetails = () => {
           url: shareLink,
         };
 
-        // Some browsers (e.g., Chrome on Android) support sharing files/images.
-        // However, `navigator.share` does **not** yet support image URLs directly.
-        // So, we can only include title, text, and URL.
-
         await navigator.share(shareData);
       } else {
         // Fallback to clipboard
@@ -169,8 +165,50 @@ const NewsDetails = () => {
         <meta property="article:author" content={author} />
         <meta property="article:published_time" content={publishedAt} />
 
+         {/* Meta description for SEO */}
+        <meta
+          name="description"
+          content={article.content?.substring(0, 150) || title}
+        />
+
+        {/* Meta keywords for SEO */}
+        {keywords && (
+          <meta name="keywords" content={keywords} />
+        )}
+
         {/* Ensure image is accessible */}
         <link rel="preload" as="image" href={url} />
+
+
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          headline: title,
+          image: [url],
+          author: {
+            "@type": "Person",
+            name: author,
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Merupu News",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://firebasestorage.googleapis.com/v0/b/merupu-production.appspot.com/o/test%2F1751307621070_merupu%20logo.webp?alt=media&token=41b47897-ac39-4bd6-8413-e644cae690b9",
+            },
+          },
+          datePublished: publishedAt,
+          description: article.content?.substring(0, 150) || title,
+          keywords: keywords,
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": currentUrl,
+          },
+        })}
+      </script>
+
+
       </Helmet>
 
       <div className="flex flex-col lg:flex-row justify-center w-full gap-4 px-4 py-6">
