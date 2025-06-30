@@ -57,18 +57,7 @@ const NewsDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
-  // const getShareUrls = () => {
-  //   if (!article || !currentUrl) return {};
-
-  //   const encodedUrl = encodeURIComponent(currentUrl);
-  //   const title = encodeURIComponent(article.title);
-
-  //   return {
-  //     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-  //     twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${title}`,
-  //     whatsapp: `https://wa.me/?text=${title}%0A${encodedUrl}`
-  //   };
-  // };
+ 
 
 
   const getShareUrls = () => {
@@ -87,35 +76,7 @@ const NewsDetails = () => {
 
   const shareUrls = getShareUrls();
 
-  // const handleNativeShare = async () => {
-  //   if (!article || !currentUrl) return;
-
-  //   try {
-  //     if (navigator.share) {
-  //       await navigator.share({
-  //         title: article.title,
-  //         text: `${article.title}`,
-  //         url: currentUrl,
-  //       });
-  //     } else {
-  //       // Fallback to clipboard
-  //       await navigator.clipboard.writeText(currentUrl);
-  //       alert("Link copied to clipboard!");
-  //     }
-  //   } catch (err) {
-  //     console.log("Error sharing:", err);
-  //     // Fallback to clipboard if sharing fails
-  //     try {
-  //       await navigator.clipboard.writeText(currentUrl);
-  //       alert("Link copied to clipboard!");
-  //     } catch (clipboardErr) {
-  //       console.log("Clipboard access failed:", clipboardErr);
-  //       alert("Sharing failed. Please copy the URL manually.");
-  //     }
-  //   }
-  // };
-
-
+  
   const handleNativeShare = async () => {
   if (!article || !id) return;
 
@@ -170,7 +131,7 @@ const NewsDetails = () => {
     return <p className="text-center mt-10 text-red-600">No article found.</p>;
   }
 
-  const { title, author, publishedAt, url, videoUrl, content } = article;
+  const { title, author, publishedAt, url, videoUrl, content, additionalContent, keywords } = article;
 
   const handleImageClick = () => {
     if (imageRef.current && document.fullscreenEnabled) {
@@ -270,6 +231,27 @@ const NewsDetails = () => {
           )}
 
           <p className="text-lg text-gray-700 leading-relaxed">{content}</p>
+
+          {additionalContent && (
+            <p className="text-lg text-gray-700 leading-relaxed">{additionalContent}</p>
+          )}
+
+          {keywords && keywords.trim() && (
+            <div className="flex flex-wrap gap-2">
+              {keywords
+                .split(',')
+                .map((word) => word.trim())
+                .filter((word) => word.length > 0)
+                .map((word, index) => (
+                  <p
+                    key={index}
+                    className="px-4 py-1 bg-gray-300 rounded-md cursor-pointer"
+                  >
+                    {word}
+                  </p>
+                ))}
+            </div>
+          )}
 
           <div>
             <ScrollNewsList />
