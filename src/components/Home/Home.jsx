@@ -26,34 +26,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{
-  /* Main Content */
-}
-{
-  /* <main className="w-full lg:flex-1 space-y-8 bg-black text-white p-4 rounded">
-        {articles.map((article) => (
-          <div key={article.id} className="flex flex-col md:flex-row gap-4">
-            <img
-              src={article.image}
-              alt="News"
-              className="w-full md:w-1/2 h-auto rounded object-cover"
-            />
-            <div className="flex-1">
-              <h2 className="text-xl font-bold leading-snug text-gray-400 hover:text-orange-700 cursor-pointer">
-                {article.title}
-              </h2>
-              <p className="text-sm text-gray-500 mb-2">
-                {article.author} - {article.date}
-              </p>
-              <p className="text-gray-600 mb-4">{article.excerpt}</p>
-              <button 
-                onClick={() => navigate(`/news/${article.id}`, { state: { article } })}
-              className="bg-orange-700 hover:bg-orange-600 text-white px-4 py-2 text-sm font-semibold rounded">
-                Read more
-              </button>
-            </div>
-          </div>
-        ))}
-      </main> */
-}

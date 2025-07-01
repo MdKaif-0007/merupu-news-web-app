@@ -40,7 +40,10 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter size={20} className="text-[#b6261b] cursor-pointer hover:scale-95" />
+                <FaXTwitter
+                  size={20}
+                  className="text-[#b6261b] cursor-pointer hover:scale-95"
+                />
               </a>
 
               <a
@@ -48,7 +51,10 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube size={20} className="text-[#b6261b] cursor-pointer hover:scale-95" />
+                <FaYoutube
+                  size={20}
+                  className="text-[#b6261b] cursor-pointer hover:scale-95"
+                />
               </a>
             </div>
           </div>

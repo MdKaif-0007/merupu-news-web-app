@@ -17,7 +17,10 @@ const NewsCategory = () => {
     setError(null);
     try {
       const res = await fetch(
-        `https://merupu-news.onrender.com/api/news?category=${category.replace("-", " ")}&page=${page}`
+        `https://merupu-news.onrender.com/api/news?category=${category.replace(
+          "-",
+          " "
+        )}&page=${page}`
       );
       const result = await res.json();
       setData(result.docs || []);
@@ -31,26 +34,20 @@ const NewsCategory = () => {
     }
   };
 
-//   useEffect(() => {
-//     fetchNews();
-//   }, [category, page]);
-
-
   // Reset page to 1 when category changes
-useEffect(() => {
-  setPage(1);
-}, [category]);
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
 
-// Fetch news when page or category changes
-useEffect(() => {
-  setData([]); // Clear previous data to show loading spinner immediately
-  fetchNews();
-}, [page, category]);
+  // Fetch news when page or category changes
+  useEffect(() => {
+    setData([]); // Clear previous data to show loading spinner immediately
+    fetchNews();
+  }, [page, category]);
 
-
-    const handleClick = (article) => {
+  const handleClick = (article) => {
     const url = `/api/news/${article._id}`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   const handlePageChange = (newPage) => {
@@ -119,7 +116,7 @@ useEffect(() => {
   };
 
   useEffect(() => {
-     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
   return (
@@ -208,95 +205,3 @@ useEffect(() => {
 };
 
 export default NewsCategory;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-
-// const NewsCategory = () => {
-//   const { category } = useParams();
-//   const [newsData, setNewsData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [page] = useState(1); // You can add pagination support later
-
-//   useEffect(() => {
-//     const fetchNews = async () => {
-//       try {
-//         setLoading(true);
-//         const response = await fetch(
-//           `https://merupu-news.onrender.com/api/news?category=${category.replace("-", " ")}&page=${page}`
-//         );
-//         const data = await response.json();
-//         setNewsData(data?.docs || []);
-//       } catch (error) {
-//         console.error("Error fetching category news:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchNews();
-//   }, [category, page]);
-
-//   return (
-//     <div className="max-w-5xl mx-auto p-4">
-//       <h2 className="text-2xl font-bold mb-4 capitalize">
-//         {category.replace("-", " ")} News
-//       </h2>
-
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : newsData.length === 0 ? (
-//         <p>No news articles available.</p>
-//       ) : (
-//         <div className="grid gap-4">
-//           {newsData.map((news) => (
-//             <div
-//               key={news._id}
-//               className="border p-4 rounded shadow hover:shadow-lg transition duration-300"
-//             >
-//               <h3 className="text-xl font-semibold mb-2">{news.title}</h3>
-
-//               {news.url && (
-//                 <img
-//                   src={news.url}
-//                   alt={news.title}
-//                   className="w-full h-52 object-cover mb-2 rounded"
-//                 />
-//               )}
-
-//               <p className="text-sm text-gray-700">
-//                 {news.content?.slice(0, 150)}...
-//               </p>
-
-//               <p className="text-xs text-gray-500 mt-2">
-//                 {new Date(news.publishedAt).toLocaleString("en-IN", {
-//                   day: "numeric",
-//                   month: "short",
-//                   year: "numeric",
-//                   hour: "2-digit",
-//                   minute: "2-digit",
-//                 })}
-//               </p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default NewsCategory;
-

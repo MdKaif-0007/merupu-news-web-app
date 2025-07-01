@@ -16,37 +16,29 @@ import About from "./components/Links/About";
 import PrivacyPolicy from "./components/Links/PrivacyPolicy";
 import NewsCategory from "./components/NewsCategory/NewsCategory";
 
-
-
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route path="" element={<Home />} />
-
         <Route path="/news/:category" element={<NewsDistrict />} />
         <Route path="/api/news/:id" element={<NewsDetails />} />
-
-        <Route path="/news/all-news" element={<AllNews/>} />
-
-        <Route path="/news/category/:category" element={<NewsCategory/>} />
-
-        <Route path="/contact" element={<ContactUs/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/privacy" element={<PrivacyPolicy/>} />
-
+        <Route path="/news/all-news" element={<AllNews />} />
+        <Route path="/news/category/:category" element={<NewsCategory />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="" element={<Footer />} />
       </Route>
     )
   );
 
   return (
-    <>
-      <div>
-        <RouterProvider router={router} />
-      </div>
-    </>
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   );
 }
 
