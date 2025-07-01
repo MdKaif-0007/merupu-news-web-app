@@ -16,8 +16,6 @@ import About from "./components/Links/About";
 import PrivacyPolicy from "./components/Links/PrivacyPolicy";
 import NewsCategory from "./components/NewsCategory/NewsCategory";
 
-import { HelmetProvider } from "react-helmet-async";
-
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,11 +33,7 @@ function App() {
     )
   );
 
-  return (
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
